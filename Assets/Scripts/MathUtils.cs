@@ -15,19 +15,19 @@ namespace AdrianMiasik
         /// <returns></returns>
         public static Vector3 GetPointOnCubicBezierCurve(Vector3 _p0, Vector3 _p1, Vector3 _p2, Vector3 _p3, float _time)
         {
-            float term = 1 - _time;
+            float _term = 1 - _time;
             
-            float termSquared = term * term;
-            float timeSquared = _time * _time;
+            float _termSquared = _term * _term;
+            float _timeSquared = _time * _time;
             
-            float termCubed = termSquared * term;
-            float timeCubed = timeSquared * _time;
+            float _termCubed = _termSquared * _term;
+            float _timeCubed = _timeSquared * _time;
             
             // Formula Source: https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B%C3%A9zier_curves
-            return _p0 * termCubed + 
-                   _p1 * (3 * termSquared * _time) +
-                   _p2 * (3 * timeSquared * term) +
-                   _p3 * timeCubed;
+            return _p0 * _termCubed + 
+                   _p1 * (3 * _termSquared * _time) +
+                   _p2 * (3 * _timeSquared * _term) +
+                   _p3 * _timeCubed;
         }
     }
 }
