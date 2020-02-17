@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using AdrianMiasik;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Selector : MonoBehaviour
+public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private List<Selection> allSelections = new List<Selection>();
+    [SerializeField] private GameObject selectionVisual;
     
-    public static Selector instance { get; private set; }
+    public static SelectionManager instance { get; private set; }
     
     private void Awake()
     {
@@ -18,10 +18,11 @@ public class Selector : MonoBehaviour
         }
         else
         {
+            Debug.LogWarning("Removing singleton instance since one already exists.");
             Destroy(gameObject);
         }
     }
-    
+
     /// <summary>
     /// Select a single object
     /// </summary>
@@ -31,11 +32,13 @@ public class Selector : MonoBehaviour
         allSelections.Clear();
         allSelections.Add(_selection);
 
+        selectionVisual.transform.position = _selection.transform.position;
+        
         Debug.Log("Selected: " + _selection.gameObject.name);
     }
 
     /// <summary>
-    /// Safely adds your selection to the selector
+    /// Adds your selection to the selector
     /// </summary>
     /// <param name="_selection"></param>
     public void AddSelection(Selection _selection)
@@ -64,6 +67,7 @@ public class Selector : MonoBehaviour
     public void Deselect()
     {
         Debug.Log("All selections cleared.");
+        
         allSelections.Clear();
     }
 

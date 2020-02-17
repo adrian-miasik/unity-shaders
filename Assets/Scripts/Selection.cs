@@ -7,6 +7,6 @@ public class Selection : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        Selector.instance.Select(this);
+        SelectionManager.instance.Select(this);
     }
 }
