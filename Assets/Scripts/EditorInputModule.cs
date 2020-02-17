@@ -575,7 +575,7 @@ namespace UnityEngine.EventSystems
 
                 if (currentOverGo == null)
                 {
-                    Selector.instance.Deselect();
+                    SelectionManager.instance.Deselect();
                 }
                 
                 DeselectIfSelectionChanged(currentOverGo, pointerEvent);
