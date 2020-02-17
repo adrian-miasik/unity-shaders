@@ -573,7 +573,7 @@ namespace UnityEngine.EventSystems
                 pointerEvent.pressPosition = pointerEvent.position;
                 pointerEvent.pointerPressRaycast = pointerEvent.pointerCurrentRaycast;
 
-                if (currentOverGo == null)
+                if (currentOverGo == null && pointerEvent.button == PointerEventData.InputButton.Left)
                 {
                     SelectionManager.instance.Deselect();
                 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AdrianMiasik;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private GameObject selectionVisual;
     
     public static SelectionManager instance { get; private set; }
+
+    private Selection lastSelectionPoint;
     
     private void Awake()
     {
@@ -23,25 +26,47 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Select a single object
-    /// </summary>
-    /// <param name="_selection"></param>
-    public void Select(Selection _selection)
+    public void OnClick(Selection _selection)
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            // If we don't have this selection...
+            if (!allSelections.Contains(_selection))
+            {
+                AddSelection(_selection);
+            }
+            else
+            {
+                RemoveSelection(_selection);
+            }
+        }
+        else
+        {
+            // If we don't have this selection...
+            if (!allSelections.Contains(_selection))
+            {
+                Select(_selection);
+            }
+            else
+            {
+                Deselect();
+            }
+        }
+    }
+
+    private void Select(Selection _selection)
     {
         allSelections.Clear();
         allSelections.Add(_selection);
 
-        selectionVisual.transform.position = _selection.transform.position;
-        
-        Debug.Log("Selected: " + _selection.gameObject.name);
+        ShowVisual(_selection.transform.position);
     }
-
+    
     /// <summary>
     /// Adds your selection to the selector
     /// </summary>
     /// <param name="_selection"></param>
-    public void AddSelection(Selection _selection)
+    private void AddSelection(Selection _selection)
     {
         if (allSelections.Contains(_selection))
         {
@@ -49,26 +74,20 @@ public class SelectionManager : MonoBehaviour
             return;
         }
         
-        ForceAddSelection(_selection);
-    }
-
-    /// <summary>
-    /// Forcefully adds your selection to the selector 
-    /// </summary>
-    /// <summary>
-    /// Note: Use AddSelection() if you don't know what you are doing.
-    /// </summary>
-    /// <param name="_selection"></param>
-    private void ForceAddSelection(Selection _selection)
-    {
         allSelections.Add(_selection);
+        UpdateVisuals();
     }
-
+    
+    private void RemoveSelection(Selection _selection)
+    {
+        allSelections.Remove(_selection);
+        UpdateVisuals();
+    }
+    
     public void Deselect()
     {
-        Debug.Log("All selections cleared.");
-        
         allSelections.Clear();
+        HideVisual();
     }
 
     /// <summary>
@@ -82,5 +101,35 @@ public class SelectionManager : MonoBehaviour
         }
         
         Debug.Log("Total selected: [" + allSelections.Count + "]");
+    }
+
+    public bool IsSelectionAdded(Selection _selection)
+    {
+        return allSelections.Contains(_selection);
+    }
+
+    private void UpdateVisuals()
+    {
+        Vector3 resultPosition = Vector3.zero;
+        
+        foreach (Selection selection in allSelections)
+        {
+            resultPosition +=  selection.transform.position;
+        }
+
+        resultPosition /= allSelections.Count;
+        
+        ShowVisual(resultPosition);
+    }
+    
+    private void ShowVisual(Vector3 _position)
+    {
+        selectionVisual.SetActive(true);
+        selectionVisual.transform.position = _position;
+    }
+
+    private void HideVisual()
+    {
+        selectionVisual.SetActive(false);
     }
 }
