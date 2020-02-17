@@ -573,6 +573,11 @@ namespace UnityEngine.EventSystems
                 pointerEvent.pressPosition = pointerEvent.position;
                 pointerEvent.pointerPressRaycast = pointerEvent.pointerCurrentRaycast;
 
+                if (currentOverGo == null)
+                {
+                    Selector.instance.Deselect();
+                }
+                
                 DeselectIfSelectionChanged(currentOverGo, pointerEvent);
 
                 // search for the control that will receive the press
