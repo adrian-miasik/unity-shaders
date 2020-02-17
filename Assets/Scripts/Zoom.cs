@@ -1,30 +1,31 @@
-﻿using System;
-using AdrianMiasik;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Zoom : MonoBehaviour
+namespace AdrianMiasik
 {
-    [SerializeField] private OrbitCamera orbitCamera;
-    [SerializeField] private float sensitivity = 1f;
-    
-    private float currentZoom = 20f;
-    
-    private void Start()
+    public class Zoom : MonoBehaviour
     {
-        if (orbitCamera == null)
-        {
-            Debug.LogWarning("Missing reference to orbitCamera. (An OrbitCamera.cs Component)");
-        }
-    }
+        [SerializeField] private OrbitCamera orbitCamera;
+        [SerializeField] private float sensitivity = 1f;
 
-    private void Update()
-    {
-        currentZoom += FetchInput() * sensitivity;
-        orbitCamera.SetZoomDistance(currentZoom);
-    }
-    
-    private float FetchInput()
-    {
-        return Input.GetAxis("Mouse ScrollWheel") * -1;
+        private float currentZoom = 20f;
+
+        private void Start()
+        {
+            if (orbitCamera == null)
+            {
+                Debug.LogWarning("Missing reference to orbitCamera. (An OrbitCamera.cs Component)");
+            }
+        }
+
+        private void Update()
+        {
+            currentZoom += FetchInput() * sensitivity;
+            orbitCamera.SetZoomDistance(currentZoom);
+        }
+
+        private float FetchInput()
+        {
+            return Input.GetAxis("Mouse ScrollWheel") * -1;
+        }
     }
 }
