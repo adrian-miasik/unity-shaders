@@ -4,13 +4,13 @@ using UnityEngine.Serialization;
 
 namespace UnityEngine.EventSystems
 {
-    [AddComponentMenu("Event/Standalone Input Module")]
     /// <summary>
     /// A BaseInputModule designed for mouse / keyboard / controller input.
     /// </summary>
     /// <remarks>
     /// Input module for working with, mouse, keyboard, or controller.
     /// </remarks>
+    [AddComponentMenu("Event/Editor Input Module")]
     public class EditorInputModule : PointerInputModule
     {
         private float m_PrevActionTime;
@@ -21,26 +21,11 @@ namespace UnityEngine.EventSystems
         private Vector2 m_MousePosition;
 
         private GameObject m_CurrentFocusedGameObject;
-
         private PointerEventData m_InputPointerEvent;
-
-        protected StandaloneInputModule()
-        {
-        }
-
-        [Obsolete("Mode is no longer needed on input module as it handles both mouse and keyboard simultaneously.", false)]
-        public enum InputMode
-        {
-            Mouse,
-            Buttons
-        }
-
-        [Obsolete("Mode is no longer needed on input module as it handles both mouse and keyboard simultaneously.", false)]
-        public InputMode inputMode
-        {
-            get { return InputMode.Mouse; }
-        }
-
+        
+        /// <summary>
+        /// Name of the horizontal axis for movement (if axis events are used).
+        /// </summary>
         [SerializeField]
         private string m_HorizontalAxis = "Horizontal";
 
@@ -57,7 +42,7 @@ namespace UnityEngine.EventSystems
         private string m_SubmitButton = "Submit";
 
         /// <summary>
-        /// Name of the submit button.
+        /// Name of the cancel button.
         /// </summary>
         [SerializeField]
         private string m_CancelButton = "Cancel";
@@ -531,13 +516,7 @@ namespace UnityEngine.EventSystems
         {
             ProcessMouseEvent(0);
         }
-
-        [Obsolete("This method is no longer checked, overriding it with return true does nothing!")]
-        protected virtual bool ForceAutoSelect()
-        {
-            return false;
-        }
-
+        
         /// <summary>
         /// Process all mouse events.
         /// </summary>
