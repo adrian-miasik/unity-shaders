@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5119129513677522775}
   m_Layer: 0
-  m_Name: Transform Vector
+  m_Name: Transform 3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
