@@ -1,13 +1,15 @@
-﻿Shader "AdrianMiasik/Examples/Normals"
+﻿Shader "AdrianMiasik/Examples/Lambert"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
         _MainColor("Color", Color) = (1,1,1,1)
+        _AmbientLight("Ambient Light", Color) = (0.0,0.075,0.15, 1)
     }
     SubShader
     {
         Tags { "RenderType"="Opaque" }
+        LOD 100
 
         Pass
         {
@@ -16,6 +18,7 @@
             #pragma fragment frag
 
             #include "UnityCG.cginc"
+            #include "Lighting.cginc"
 
             struct appdata
             {
@@ -31,6 +34,7 @@
 
             sampler2D _MainTex;
             float4 _MainColor;
+            float4 _AmbientLight;
 
             v2f vert (appdata v)
             {
@@ -42,8 +46,12 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float3 normal = i.normal * 0.5 + 0.5; // Normals are negative one to one, this converts to 0-1
-                return float4(normal, 1);
+                float3 lightSource = _WorldSpaceLightPos0.xyz;
+                float lightFalloff = max(0, dot(lightSource, i.normal)); // 0 - 1
+                                
+                float3 diffuseLight = _LightColor0 * lightFalloff;
+                                
+                return float4(diffuseLight + _AmbientLight, 1);
             }
             ENDCG
         }

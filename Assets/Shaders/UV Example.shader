@@ -44,7 +44,7 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                return float4(i.uv.r, i.uv.g, 0, 1);
+                return float4(i.uv.r, i.uv.g, 0, 1); // Quad has no z uv's
             }
             ENDCG
         }
