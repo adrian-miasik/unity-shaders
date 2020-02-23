@@ -8,7 +8,6 @@
     SubShader
     {
         Tags { "Queue"="Transparent" }
-        LOD 100
 
         Pass
         {
