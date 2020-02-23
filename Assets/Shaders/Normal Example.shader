@@ -42,7 +42,7 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float3 normal = i.normal * 0.5 + 0.5; // Normals are negative one to one, this converts to 0-1
+                float3 normal = i.normal;// * 0.5 + 0.5; // Normals are negative one to one, this converts to 0-1
                 return float4(normal, 1);
             }
             ENDCG
