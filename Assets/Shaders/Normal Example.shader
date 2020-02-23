@@ -21,30 +21,30 @@
             struct appdata
             {
                 float4 vertex : POSITION;
-                float3 normals : TEXCOORD1;
+                float3 normal : NORMAL;
             };
 
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                float3 normals : TEXCOORD1;
+                float3 normal : NORMAL;
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
             float4 _MainColor;
 
             v2f vert (appdata v)
             {
                 v2f o;
-                o.normals = v.normals;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+                o.normal = v.normal;
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                return float4(i.normals, 0);
+                float3 normal = i.normal * 0.5 + 0.5f;
+                return float4(normal, 1);
             }
             ENDCG
         }
