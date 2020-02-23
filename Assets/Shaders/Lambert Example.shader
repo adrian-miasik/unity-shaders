@@ -53,7 +53,7 @@
                 
                 // Composite
                 float3 diffuseLight = _AmbientLight + directDiffuseLight;
-                float result = diffuseLight * _MainColor;
+                float3 result = diffuseLight * _MainColor;
                                
                 return float4(result, 1);
             }
