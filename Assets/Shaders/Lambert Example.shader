@@ -46,12 +46,16 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
+                // Direct light
                 float3 lightSource = _WorldSpaceLightPos0.xyz;
-                float lightFalloff = max(0, dot(lightSource, i.normal)); // 0 - 1
-                                
-                float3 diffuseLight = _LightColor0 * lightFalloff;
-                                
-                return float4(diffuseLight + _AmbientLight, 1);
+                float lightFalloff = max(0, dot(lightSource, i.normal)); // 0f to 1f                 
+                float3 directDiffuseLight = _LightColor0 * lightFalloff;
+                
+                // Composite
+                float3 diffuseLight = _AmbientLight + directDiffuseLight;
+                float result = diffuseLight * _MainColor;
+                               
+                return float4(result, 1);
             }
             ENDCG
         }
