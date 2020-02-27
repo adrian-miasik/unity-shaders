@@ -98,7 +98,7 @@ public class BackgroundScenarioManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Increment/decrement our current index while staying within the bounds of our list by wrapping.
+    /// Increment/decrement our currentColor index while staying within the bounds of our array by wrapping.
     /// </summary>
     /// <param name="difference"></param>
     private void ChangeColorSelection(int difference)
