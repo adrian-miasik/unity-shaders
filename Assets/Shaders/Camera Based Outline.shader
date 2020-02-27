@@ -11,18 +11,24 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" }
+        Tags {
+            "RenderPipeline"="LightweightPipeline" 
+            "RenderType"="Transparent" 
+        }
         
         Pass
         {
+            Tags { "LightMode"="LightweightForward" }
             ZWrite Off
             Blend SrcAlpha OneMinusSrcAlpha
                 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma prefer_hlslcc gles
+            #pragma exclude_renderers d3d11_9x
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
             
             struct appdata
             {
@@ -33,25 +39,35 @@
             struct v2f
             {
                 float4 vertex : SV_POSITION;
+                float3 normal : NORMAL;
             };
 
             float4 _Color;
             float _Width;
-
+            
+            // Unsupported? 
             v2f vert (appdata v)
             {
                 v2f o;
-                float distanceToCamera = distance(UnityObjectToWorldDir(v.vertex), _WorldSpaceCameraPos);
-                v.vertex.xyz += normalize(v.normal) * distanceToCamera * _Width;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+
+                VertexPositionInputs vertex = GetVertexPositionInputs(v.vertex);
+                o.vertex = vertex.positionCS;
+                
+                VertexNormalInputs normal = GetVertexNormalInputs(v.normal);
+                o.normal = normal.normalWS;
+                
+                float distanceToCamera = distance(mul((float3x3)unity_ObjectToWorld, o.vertex), _WorldSpaceCameraPos);
+                v.vertex.xyz += normalize(o.normal) * _Width * distanceToCamera;
+                o.vertex = TransformWorldToHClip(v.vertex);
                 return o;
+                
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            half4 frag (v2f i) : SV_Target
             {
                 return _Color;
             }
-            ENDCG
+            ENDHLSL
         }
         Pass
         {
