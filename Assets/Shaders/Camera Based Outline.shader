@@ -45,7 +45,6 @@
             float4 _Color;
             float _Width;
             
-            // Unsupported? 
             v2f vert (appdata v)
             {
                 v2f o;
