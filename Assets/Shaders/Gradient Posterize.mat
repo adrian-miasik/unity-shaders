@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Bands: 4
+    - _Bands: 5
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -64,9 +64,9 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MaxValue: 0.75
+    - _MaxValue: 1
     - _Metallic: 0
-    - _MinValue: 0.25
+    - _MinValue: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
