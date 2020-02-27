@@ -19,6 +19,8 @@ namespace AdrianMiasik
         private void Update()
         {
             currentZoom += FetchInput() * sensitivity;
+            currentZoom = Mathf.Clamp(currentZoom, 0, currentZoom);
+            
             orbitCamera.SetZoomDistance(currentZoom);
         }
 
