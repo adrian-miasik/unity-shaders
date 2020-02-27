@@ -100,7 +100,7 @@ namespace AdrianMiasik
         }
 
         /// <summary>
-        /// Increment/decrement our current index while staying within the bounds of our list.
+        /// Increment/decrement our current index while staying within the bounds of our list by wrapping.
         /// </summary>
         /// <param name="difference"></param>
         private void ChangeIndex(int difference)
