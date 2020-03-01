@@ -12,8 +12,7 @@ namespace AdrianMiasik
         [SerializeField] private Vector2 startingRotation = new Vector2(45f,0f);
         [SerializeField] private Vector2 axisSensitivity = Vector2.one;
         [SerializeField] private float distanceFromTarget = 15f;
-        
-        
+        [SerializeField] private float minDistanceClamp = 1;
         
         [SerializeField] private bool autoSpin;
         [SerializeField] private Vector2 spinDirection = Vector2.up;
@@ -84,6 +83,7 @@ namespace AdrianMiasik
         public void SetZoomDistance(float _desiredZoom)
         {
             distanceFromTarget = _desiredZoom;
+            distanceFromTarget = Mathf.Clamp(distanceFromTarget, minDistanceClamp, distanceFromTarget);
         }
     }
 }
