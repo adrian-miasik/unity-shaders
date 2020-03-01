@@ -6,8 +6,7 @@ namespace AdrianMiasik
     {
         [SerializeField] private OrbitCamera orbitCamera;
         [SerializeField] private float sensitivity = 1f;
-
-        private float currentZoom = 20f;
+        [SerializeField] private float currentZoom = 20f;
 
         private void Start()
         {
@@ -20,6 +19,8 @@ namespace AdrianMiasik
         private void Update()
         {
             currentZoom += FetchInput() * sensitivity;
+            currentZoom = Mathf.Clamp(currentZoom, 0, currentZoom);
+            
             orbitCamera.SetZoomDistance(currentZoom);
         }
 
