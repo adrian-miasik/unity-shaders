@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Scrolling Texture
-  m_Shader: {fileID: 4800000, guid: fe2caf67eaffdc6469819a2baa34fc8f, type: 3}
+  m_Shader: {fileID: 4800000, guid: d56f4c9e631bb7043871daee1293a5d6, type: 3}
   m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULAR_COLOR
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -35,6 +35,7 @@ Material:
     - Vector1_1795B84E: 1
     - Vector1_79D57393: 1
     - Vector1_DB8B00E9: -1
-    - Vector1_E1953EDC: 3
-    - Vector1_FC5013D6: 3
-    m_Colors: []
+    - Vector1_E1953EDC: 5
+    - Vector1_FC5013D6: 9
+    m_Colors:
+    - Color_FCBED431: {r: 0.8301887, g: 0.7967839, b: 0.246707, a: 0}
