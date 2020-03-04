@@ -2441,7 +2441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1968312477}
-  scenario: 0
+  scenario: 1
 --- !u!1 &2028606542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,7 +2594,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: -1
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2693,6 +2693,8 @@ MonoBehaviour:
   - {fileID: 922059690}
   - {fileID: 1627723272}
   - {fileID: 191610366}
+  - {fileID: 1018446623}
+  - {fileID: 0}
 --- !u!1001 &8971923567631497493
 PrefabInstance:
   m_ObjectHideFlags: 0
