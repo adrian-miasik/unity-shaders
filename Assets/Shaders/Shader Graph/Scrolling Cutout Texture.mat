@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gradient Posterize
-  m_Shader: {fileID: 4800000, guid: ba855890111b6024c9c7a921ce75840f, type: 3}
-  m_ShaderKeywords: 
+  m_Name: Scrolling Cutout Texture
+  m_Shader: {fileID: 4800000, guid: fe2caf67eaffdc6469819a2baa34fc8f, type: 3}
+  m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULAR_COLOR
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_64DDE139:
+        m_Texture: {fileID: 2800000, guid: 2b9e34aa2409a4b49bf6d83d443cd584, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -56,7 +60,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Bands: 5
+    - Vector1_1795B84E: 1
+    - Vector1_79D57393: 0.25
+    - Vector1_DB8B00E9: -0.25
+    - Vector1_E1953EDC: 5
+    - Vector1_FC5013D6: 8
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -64,9 +72,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MaxValue: 1
     - _Metallic: 0
-    - _MinValue: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -76,8 +82,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _BottomColor: {r: 0.8867924, g: 0.6562411, b: 0.2300641, a: 1}
+    - Color_FCBED431: {r: 0.7058824, g: 0.28801265, b: 0.23137254, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 0.39215687}
-    - _TopColor: {r: 0.9528302, g: 0.17528482, b: 0.3673146, a: 1}
