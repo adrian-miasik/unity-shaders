@@ -57,7 +57,7 @@
                 
                 float distanceToCamera = distance(mul((float3x3)unity_ObjectToWorld, o.vertex), _WorldSpaceCameraPos);
                 v.vertex.xyz += normalize(o.normal) * _Width * distanceToCamera;
-                o.vertex = TransformWorldToHClip(v.vertex);
+                o.vertex = TransformObjectToHClip(v.vertex.xyz);
                 return o;
                 
             }
@@ -66,6 +66,7 @@
             {
                 return _Color;
             }
+            
             ENDHLSL
         }
         Pass
