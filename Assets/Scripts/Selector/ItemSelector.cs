@@ -1,40 +1,71 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace AdrianMiasik
 {
     /// <summary>
-    /// A class that keeps track of our current (and previous) selection in a list.
+    /// A class that keeps track of our current (and previous) selection in a collection
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class ItemSelector<T> : MonoBehaviour
+    public class ItemSelector<T> : MonoBehaviour
     {
-        [SerializeField] private List<T> items = new List<T>();
+        [SerializeField] private Collection<T> items = new Collection<T>();
 
-        private int currentIndex;
         private T currentItem;
+        private int currentIndex;
+        
         private T lastSelectedItem;
         
-        public delegate void OnSelectionChange(T _newSelection);
+        /// <summary>
+        /// Invoked when the selection changes
+        /// </summary>
+        /// <param name="_previousSelection"></param>
+        /// <param name="_currentSelection"></param>
+        public delegate void OnSelectionChange(T _previousSelection, T _currentSelection);
         public OnSelectionChange onSelectionChange;
         
+        /// <summary>
+        /// Invoked when an item gets selected
+        /// </summary>
+        /// <param name="_selectedItem"></param>
+        public delegate void OnSelected(T _selectedItem);
+        public OnSelected onSelected;
+        
+        /// <summary>
+        /// Invoked when an item gets deselected
+        /// </summary>
+        /// <param name="_deselectedItem"></param>
+        public delegate void OnDeselected(T _deselectedItem);
+        public OnDeselected onDeselected;
+
+        /// <summary>
+        /// Initializes with the serialized list
+        /// </summary>
         public void Initialize()
         {
             currentIndex = 0;
             currentItem = items[currentIndex];
             
-            foreach (T _item in items)
-            {
-                OnStart(_item);
-            }
-
             ChangeItem(currentItem);
         }
         
-        protected virtual void Update()
+        /// <summary>
+        /// Initializes with a specific set of objects
+        /// </summary>
+        /// <param name="_allSelectionItems"></param>
+        public void Initialize(IEnumerable<T> _allSelectionItems)
         {
-            // TODO: Remove hardcoded input logic
-            
+            foreach (T item in _allSelectionItems)
+            {
+                items.Add(item);
+            }
+
+            Initialize();
+        }
+        
+        protected void Update()
+        {
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 PreviousItem();
@@ -46,24 +77,6 @@ namespace AdrianMiasik
             }
         }
         
-        /// <summary>
-        /// Invoked for each item in the selector on initialization
-        /// </summary>
-        /// <param name="_spawnedItem"></param>
-        protected abstract void OnStart(T _spawnedItem);
-        
-        /// <summary>
-        /// Invoked when an item gets selected
-        /// </summary>
-        /// <param name="_selectedItem"></param>
-        protected abstract void OnSelected(T _selectedItem);
-        
-        /// <summary>
-        /// Invoked when an item gets deselected
-        /// </summary>
-        /// <param name="_deselectedItem"></param>
-        protected abstract void OnDeselected(T _deselectedItem);
-
         public void AddItem(T _item)
         {
             items.Add(_item);
@@ -80,7 +93,7 @@ namespace AdrianMiasik
         private void PreviousItem()
         {
             ChangeIndex(-1);
-            SetItem(currentIndex);
+            Select(currentIndex);
         }
 
         /// <summary>
@@ -89,7 +102,7 @@ namespace AdrianMiasik
         private void NextItem()
         {
             ChangeIndex(1);
-            SetItem(currentIndex);
+            Select(currentIndex);
         }
         
         /// <summary>
@@ -106,7 +119,7 @@ namespace AdrianMiasik
         /// If your item is within our list, we will set the current item to it.
         /// </summary>
         /// <param name="_itemInList"></param>
-        public bool SetItem(T _itemInList)
+        public bool Select(T _itemInList)
         {
             if (!items.Contains(_itemInList))
             {
@@ -126,7 +139,7 @@ namespace AdrianMiasik
         /// <returns>
         /// If we were able to set the current item successfully, we will return True. Otherwise we return false.
         /// </returns>
-        private bool SetItem(int _index)
+        private bool Select(int _index)
         {
             if (!IsIndexValid(_index))
             {
@@ -150,35 +163,39 @@ namespace AdrianMiasik
         
         private void ChangeItem(T _itemInList)
         {
+            // Deselect
             lastSelectedItem = currentItem;
-            OnDeselected(currentItem);
+            onDeselected?.Invoke(currentItem);
+
+            // Swap
             currentItem = _itemInList;
             currentIndex = items.IndexOf(_itemInList);
-            OnSelected(currentItem);
-
-            onSelectionChange?.Invoke(currentItem);
+            
+            // Select
+            onSelected?.Invoke(currentItem);
+            onSelectionChange?.Invoke(lastSelectedItem, currentItem);
         }
         
         /// <summary>
         /// Returns the current visible item
         /// </summary>
         /// <returns></returns>
-        protected T GetCurrentItem()
+        public T GetCurrentItem()
         {
             return currentItem;
         }
 
-        protected int GetCurrentIndex()
+        public int GetCurrentIndex()
         {
             return currentIndex;
         }
 
-        protected int GetCount()
+        public int GetCount()
         {
             return items.Count;
         }
 
-        protected T GetLastSelectedItem()
+        public T GetLastSelectedItem()
         {
             return lastSelectedItem;
         }
