@@ -6,25 +6,25 @@ namespace AdrianMiasik
     public class UIContextManager : MonoBehaviour
     {
         [SerializeField] private TMP_Text text;
-        [SerializeField] private DisplayWheel _selector;
+        [SerializeField] private DisplayCaseCarousel _selector;
 
         public void Start()
         {
             _selector.onDisplayChange += OnSelectionChange;
 
-            text.text = _selector.GetSelectedDisplayModel().FetchRenderer().sharedMaterial.shader.ToString();
+            text.text = _selector.GetSelectedDisplayModel().GetModelRenderer().sharedMaterial.shader.ToString();
         }
         
-        private void OnSelectionChange(DisplayModel _previousModel, DisplayModel _currentModel)
+        private void OnSelectionChange(DisplayCase _previousCase, DisplayCase _currentCase)
         {
-            if (_currentModel == null)
+            if (_currentCase == null)
             {
                 text.enabled = false;
                 return;
             }
 
             text.enabled = true;
-            text.text = _currentModel.FetchRenderer().sharedMaterial.shader.ToString();
+            text.text = _currentCase.GetModelRenderer().sharedMaterial.shader.ToString();
         }
     }
 }
