@@ -328,7 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1968312477}
   cameraTarget: {fileID: 133244376}
-  positionOffset: {x: 0, y: 1, z: 0}
+  positionOffset: {x: 0, y: 0.4, z: 0}
   startingRotation: {x: 15, y: 0}
   axisSensitivity: {x: 3, y: 3}
   distanceFromTarget: 10
@@ -1127,7 +1127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018496267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 22.66}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 133244376}
