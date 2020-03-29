@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7238572, g: 0.72449327, b: 0.7262706, a: 1}
+  m_IndirectSpecularColor: {r: 0.72784334, g: 0.72880876, b: 0.73177576, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -180,7 +180,7 @@ MonoBehaviour:
   selector: {fileID: 96782216}
   targetPosition: {x: 0, y: 0, z: 0}
   itemOffset: {x: 0, y: 1, z: 0}
-  displayOffset: {x: 4, y: 0, z: 0}
+  displayOffset: {x: 3, y: 0, z: 0}
   animationDuration: 0.5
 --- !u!1 &133244375
 GameObject:
@@ -580,13 +580,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525411802}
-  m_LocalRotation: {x: 0.35355338, y: -0.35355338, z: 0.1464466, w: 0.8535535}
+  m_LocalRotation: {x: 0.6532815, y: -0.27059805, z: 0.27059805, w: 0.6532815}
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 45, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -45, z: 0}
 --- !u!1 &1606772408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,7 +1065,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968312475}
   m_LocalRotation: {x: 0.1305262, y: -0, z: -0, w: 0.9914449}
-  m_LocalPosition: {x: -1.17, y: 3.5881908, z: -9.659258}
+  m_LocalPosition: {x: -1.17, y: 2.988191, z: -9.659258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 646206719}
@@ -1127,7 +1127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018496267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 133244376}
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   selector: {fileID: 2018496269}
   targetPosition: {x: 0, y: 0, z: 0}
   itemOffset: {x: 0, y: 1, z: 0}
-  displayOffset: {x: 4, y: 0, z: 0}
+  displayOffset: {x: 3, y: 0, z: 0}
   animationDuration: 0.5
 --- !u!1 &2071361772
 GameObject:
