@@ -3,8 +3,8 @@
 namespace AdrianMiasik{
     public class ShaderTestStartup : MonoBehaviour
     {
-        [SerializeField] private DisplayCaseCarousel standardCarousel;
-        [SerializeField] private DisplayCaseCarousel shaderGraphCarousel;
+        [SerializeField] private DisplayCaseCarousel standardCarousel = null;
+        [SerializeField] private DisplayCaseCarousel shaderGraphCarousel = null;
 
         private void Start()
         {

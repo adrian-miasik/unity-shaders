@@ -4,7 +4,7 @@ namespace AdrianMiasik
 {
     public class BackgroundScenarioManager : MonoBehaviour
     {
-        [SerializeField] private Camera currentCamera;
+        [SerializeField] private Camera currentCamera = null;
 
         private enum ScenarioTypes
         {

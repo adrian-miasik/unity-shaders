@@ -5,9 +5,9 @@ namespace AdrianMiasik
     [ExecuteInEditMode]
     public class OrbitCamera : MonoBehaviour
     {
-        [SerializeField] private Camera camera;
-        [SerializeField] private Transform cameraTarget;
-        [SerializeField] private Vector3 positionOffset;
+        [SerializeField] private new Camera camera; // new keyword here since Component.camera already exists
+        [SerializeField] private Transform cameraTarget = null;
+        [SerializeField] private Vector3 positionOffset = Vector3.zero;
         [SerializeField] private Vector2 startingRotation = new Vector2(45f,0f);
         [SerializeField] private Vector2 axisSensitivity = Vector2.one;
         [SerializeField] private float distanceFromTarget = 15f;

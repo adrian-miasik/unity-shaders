@@ -38,7 +38,7 @@ namespace AdrianMiasik
         /// <param name="_deselectedItem"></param>
         public delegate void OnDeselected(T _deselectedItem);
         public OnDeselected onDeselected;
-
+        
         /// <summary>
         /// Initializes with the serialized list
         /// </summary>

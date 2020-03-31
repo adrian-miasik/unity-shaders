@@ -5,7 +5,7 @@ namespace AdrianMiasik
 {
     public class OpenURLOnClick : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private string url;
+        [SerializeField] private string url = string.Empty;
         
         public void OnPointerClick(PointerEventData eventData)
         {

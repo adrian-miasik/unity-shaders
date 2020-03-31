@@ -5,8 +5,8 @@ namespace AdrianMiasik
 {
     public class UIContextManager : MonoBehaviour
     {
-        [SerializeField] private TMP_Text text;
-        [SerializeField] private DisplayCaseCarousel _selector;
+        [SerializeField] private TMP_Text text = null;
+        [SerializeField] private DisplayCaseCarousel _selector = null;
 
         public void Start()
         {

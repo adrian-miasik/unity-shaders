@@ -5,11 +5,10 @@ using UnityEngine.EventSystems;
 
 namespace AdrianMiasik
 {
-    [Serializable]
     public class DisplayCase : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private GameObject display;
-        [SerializeField] private PositionConstraint modelConstraintContainer;
+        [SerializeField] private GameObject display = null;
+        [SerializeField] private PositionConstraint modelConstraintContainer = null;
         
         private GameObject model;
         

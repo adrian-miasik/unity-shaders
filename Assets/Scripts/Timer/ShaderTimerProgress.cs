@@ -4,8 +4,8 @@ namespace AdrianMiasik
 {
     public class ShaderTimerProgress : TimerProgress
     {
-        [SerializeField] private Renderer rend;
-        [SerializeField] private string shaderProgressProperty;
+        [SerializeField] private Renderer rend = null;
+        [SerializeField] private string shaderProgressProperty = null;
         
         private MaterialPropertyBlock materialBlock;
         private int shaderProgressID;

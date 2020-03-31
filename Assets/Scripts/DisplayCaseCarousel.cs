@@ -6,15 +6,21 @@ namespace AdrianMiasik
     public class DisplayCaseCarousel : MonoBehaviour
     {
         // References
-        [SerializeField] private DisplayCase displayCasePrefab;
-        [SerializeField] private MaterialList materials;
-        [SerializeField] private DisplayCaseSelector selector;
-        [SerializeField] private Vector3 targetPosition; // Position where we want the selected object to go to
+        [SerializeField] private DisplayCase displayCasePrefab = null;
+        [SerializeField] private MaterialList materials = null;
+        [SerializeField] private DisplayCaseSelector selector = null;
+        
+        // TODO: Create inspector which only shows this after init
+        [SerializeField] private Vector3 targetPosition; // Position where we want the selected object to go to 
+        
         [SerializeField] private Vector3 itemOffset = Vector3.up; // How much to offset the model inside the display case?
         [SerializeField] private Vector3 displayOffset = Vector3.right; // How much to offset the entire display case?
         [SerializeField] private float animationDuration = 0.5f;
         
-        private List<DisplayCase> displays = new List<DisplayCase>(); // Generated displays cache
+        // TODO: Create inspector which makes this a read-only
+        private bool isInit; 
+        
+        private List<DisplayCase> displays = new List<DisplayCase>(); 
         private bool isAnimating;
         private Vector3 startPosition;
         private Vector3 endPosition;
@@ -27,16 +33,24 @@ namespace AdrianMiasik
         /// <param name="_currentDisplay"></param>
         public delegate void OnDisplayChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay);
         public OnDisplayChange onDisplayChange;
-
-        private void Start()
+        
+        public void Initialize()
         {
+            if (isInit)
+            {
+                Debug.LogWarning("This carousel has already been initialized");
+                return;
+            }
+            
             displays = GenerateDisplays(displayCasePrefab, materials);
             targetPosition = transform.position;
             
             selector.Initialize(displays);
             selector.onSelectionChange += OnSelectionChange;
+
+            isInit = true;
         }
-        
+
         private void OnSelectionChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay)
         {
             // Ignore clicks on the same display case
@@ -48,26 +62,33 @@ namespace AdrianMiasik
             startPosition = transform.position;
             endPosition = displayOffset * (selector.GetCurrentIndex() * -1);
             accumulatedTime = 0;
-            
+
             isAnimating = true;
             onDisplayChange?.Invoke(_previousDisplay, _currentDisplay);
         }
 
         private void Update()
         {
-            if (isAnimating)
+            if (!isInit)
             {
-                accumulatedTime += Time.deltaTime;
-                if (accumulatedTime > animationDuration)
-                {
-                    accumulatedTime = animationDuration;
-                    isAnimating = false;
-                }
-
-                float t = accumulatedTime / animationDuration;
-                t = t * t * (3 - 2 * t); // Smoothstep formula
-                transform.position = Vector3.Lerp(startPosition, targetPosition + endPosition, t);
+                return;
             }
+
+            if (!isAnimating)
+            {
+                return;
+            }
+
+            accumulatedTime += Time.deltaTime;
+            if (accumulatedTime > animationDuration)
+            {
+                accumulatedTime = animationDuration;
+                isAnimating = false;
+            }
+
+            float t = accumulatedTime / animationDuration;
+            t = t * t * (3 - 2 * t); // Smoothstep formula
+            transform.position = Vector3.Lerp(startPosition, targetPosition + endPosition, t);
         }
 
         /// <summary>
@@ -86,11 +107,10 @@ namespace AdrianMiasik
                 displayCase.Initialize(null, itemOffset);
                 displayCase.GetDisplay().transform.position += displayOffset * i;
                 displayCase.onClick += OnDisplayWheelItemClick;
-                
 
                 // Cache display
                 generatedDisplays.Add(displayCase);
-                
+
                 // Change display item's material
                 displayCase.SwapMaterialOnModel(_list.materials[i]);
             }
