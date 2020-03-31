@@ -4,7 +4,7 @@ namespace AdrianMiasik
 {
     public class GameObjectActiveSelector : MonoBehaviour
     {
-        [SerializeField] private ItemSelector<GameObject> _selector;
+        [SerializeField] private ItemSelector<GameObject> _selector = null;
 
         private void Start()
         {

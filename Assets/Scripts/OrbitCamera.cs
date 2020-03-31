@@ -13,7 +13,7 @@ namespace AdrianMiasik
         [SerializeField] private float distanceFromTarget = 15f;
         [SerializeField] private float minDistanceClamp = 1;
         
-        [SerializeField] private bool autoSpin;
+        [SerializeField] private bool autoSpin = false;
         [SerializeField] private Vector2 spinDirection = Vector2.up;
         [SerializeField] private float spinSpeed = 0.1f;
         
