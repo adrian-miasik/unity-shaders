@@ -11,7 +11,6 @@ namespace AdrianMiasik
         [SerializeField] private PositionConstraint modelConstraintContainer = null;
         
         private GameObject model;
-        
         private new Renderer renderer;
         private const PrimitiveType primitiveFallback = PrimitiveType.Sphere;
         private bool hasInitialized;
@@ -48,7 +47,7 @@ namespace AdrianMiasik
         /// <summary>
         /// Switch the material on the model
         /// </summary>
-        /// <param name="_material"></param>
+        /// <param name="_material">The material you want to switch to</param>
         public void SwapMaterialOnModel(Material _material)
         {
             GetModelRenderer().sharedMaterial = _material;

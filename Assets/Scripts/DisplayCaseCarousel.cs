@@ -29,8 +29,6 @@ namespace AdrianMiasik
         /// <summary>
         /// Invoked when the DisplayModel selection changes
         /// </summary>
-        /// <param name="_previousDisplay"></param>
-        /// <param name="_currentDisplay"></param>
         public delegate void OnDisplayChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay);
         public OnDisplayChange onDisplayChange;
         
@@ -94,8 +92,8 @@ namespace AdrianMiasik
         /// <summary>
         /// Creates and returns a list of DisplayModel, one for each material in the list
         /// </summary>
-        /// <param name="_displayCasePrefab"></param>
-        /// <param name="_list"></param>
+        /// <param name="_displayCasePrefab">The type of display you want to generate</param>
+        /// <param name="_list">The list of materials you want to apply for each model in each display case</param>
         private List<DisplayCase> GenerateDisplays(DisplayCase _displayCasePrefab, MaterialList _list)
         {
             List<DisplayCase> generatedDisplays = new List<DisplayCase>();
