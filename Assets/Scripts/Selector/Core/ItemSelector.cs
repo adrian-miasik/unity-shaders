@@ -8,7 +8,7 @@ namespace AdrianMiasik
     /// A class that keeps track of our current (and previous) selection in a collection
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ItemSelector<T> : MonoBehaviour
+    public class ItemSelector<T> : MonoBehaviour where T : class
     {
         [SerializeField] private Collection<T> items = new Collection<T>();
 
@@ -63,6 +63,12 @@ namespace AdrianMiasik
 
             Initialize();
         }
+
+        public void Clear()
+        {
+            items.Clear();
+            currentItem = null;
+        }
         
         protected void Update()
         {
@@ -90,7 +96,7 @@ namespace AdrianMiasik
         /// <summary>
         /// Disables the current item and enables the previous item in the list.
         /// </summary>
-        private void PreviousItem()
+        public void PreviousItem()
         {
             ChangeIndex(-1);
             Select(currentIndex);
@@ -99,7 +105,7 @@ namespace AdrianMiasik
         /// <summary>
         /// Disables the current item and enables the next item in the list.
         /// </summary>
-        private void NextItem()
+        public void NextItem()
         {
             ChangeIndex(1);
             Select(currentIndex);

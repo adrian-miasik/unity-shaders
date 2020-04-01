@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AdrianMiasik
@@ -32,6 +33,7 @@ namespace AdrianMiasik
         public delegate void OnDisplayChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay);
         public OnDisplayChange onDisplayChange;
         
+        [ContextMenu("Initialize")]
         public void Initialize()
         {
             if (isInit)
@@ -49,6 +51,31 @@ namespace AdrianMiasik
             isInit = true;
         }
 
+        /// <summary>
+        /// Destroys any cached game objects
+        /// </summary>
+        [ContextMenu("Clean Up")]
+        public void CleanUp()
+        {
+            foreach (DisplayCase displayCase in displays)
+            {
+                DestroyImmediate(displayCase.gameObject);
+            }
+            
+            Clear();
+        }
+        
+        public void Clear()
+        {
+            displays.Clear();
+            targetPosition = Vector3.zero;
+            
+            selector.onSelectionChange -= OnSelectionChange;
+            selector.Clear();
+            
+            isInit = false;
+        }
+        
         private void OnSelectionChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay)
         {
             // Ignore clicks on the same display case
@@ -116,6 +143,16 @@ namespace AdrianMiasik
             return generatedDisplays;
         }
 
+        public void NextDisplay()
+        {
+            selector.NextItem();
+        }
+
+        public void PreviousDisplay()
+        {
+            selector.PreviousItem();
+        }
+        
         public DisplayCase GetSelectedDisplayModel()
         {
             return selector.GetCurrentItem();

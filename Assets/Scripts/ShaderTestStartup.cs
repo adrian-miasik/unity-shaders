@@ -11,11 +11,18 @@ namespace AdrianMiasik{
             SetupEnvironment();
         }
 
-        [ContextMenu("Setup Environment")]
+        [ContextMenu("Start Environment")]
         private void SetupEnvironment()
         {
             standardCarousel.Initialize();
             shaderGraphCarousel.Initialize();
+        }
+        
+        [ContextMenu("Quit Environment")]
+        private void CleanUpEnvironment()
+        {
+            standardCarousel.CleanUp();
+            shaderGraphCarousel.CleanUp();
         }
     }
 }
