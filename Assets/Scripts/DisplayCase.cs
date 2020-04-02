@@ -9,8 +9,10 @@ namespace AdrianMiasik
     {
         [SerializeField] private GameObject display = null;
         [SerializeField] private PositionConstraint modelConstraintContainer = null;
+
+        [Header("Optional")]
+        [SerializeField] private GameObject model;
         
-        private GameObject model;
         private new Renderer renderer;
         private const PrimitiveType primitiveFallback = PrimitiveType.Sphere;
         private bool hasInitialized;
@@ -18,20 +20,11 @@ namespace AdrianMiasik
         public delegate void OnClick(DisplayCase _clickedCase);
         public OnClick onClick;
         
-        public void Initialize(GameObject _modelToSpawn, Vector3 _newPosition)
+        public void Initialize(GameObject _modelToSpawn, Vector3 _modelLocalPos)
         {
-            // Spawn model
-            if (_modelToSpawn == null)
+            if (model == null)
             {
-                // Use fallback model
-                model = GameObject.CreatePrimitive(primitiveFallback);
-                model.transform.SetParent(modelConstraintContainer.transform);
-                model.transform.localPosition = _newPosition;
-            }
-            else
-            {
-                // Use desired model
-                model = Instantiate(_modelToSpawn, _newPosition, Quaternion.identity, modelConstraintContainer.transform);
+                SpawnModel(_modelToSpawn, _modelLocalPos);
             }
 
             if (model != null)
@@ -45,10 +38,37 @@ namespace AdrianMiasik
         }
 
         /// <summary>
+        /// Spawns provided gameobject at a specific local position
+        /// </summary>
+        /// <summary>
+        /// Note: If no model is provided we will use a fallback gameobject instead
+        /// </summary>>
+        /// <param name="_modelToSpawn"></param>
+        /// <param name="_modelLocalPos"></param>
+        private void SpawnModel(GameObject _modelToSpawn, Vector3 _modelLocalPos)
+        {
+            if (_modelToSpawn == null)
+            {
+                Debug.LogWarning("No model found. Falling back to primitive model.");
+                
+                // Use fallback model
+                model = GameObject.CreatePrimitive(primitiveFallback);
+                model.transform.SetParent(modelConstraintContainer.transform);
+            }
+            else
+            {
+                // Use desired model
+                model = Instantiate(_modelToSpawn, modelConstraintContainer.transform);
+            }
+            
+            model.transform.localPosition = _modelLocalPos;
+        }
+        
+        /// <summary>
         /// Switch the material on the model
         /// </summary>
         /// <param name="_material">The material you want to switch to</param>
-        public void SwapMaterialOnModel(Material _material)
+        public void ChangeModelMaterial(Material _material)
         {
             GetModelRenderer().sharedMaterial = _material;
         }
@@ -57,22 +77,10 @@ namespace AdrianMiasik
         {
             return display;
         }
-
-        public GameObject GetModel()
-        {
-            return model;
-        }
         
         /// <summary>
-        /// Returns the renderer component on the model GameObject.
+        /// Returns the renderer component on the model GameObject
         /// </summary>
-        /// <summary>If a cached renderer is found, we will return that.</summary>
-        /// <summary>If a cached renderer is not found, we will attempt to get and return the renderer on the model
-        /// using GetComponent.</summary>
-        /// <summary>If the GetComponent renderer is not found, we will attempt to create and return a new renderer
-        /// on the model using AddComponent.</summary>
-        /// <summary>If the created renderer is not created successfully, we will return null and log an assertion.</summary>
-        /// <returns></returns>
         public Renderer GetModelRenderer()
         {
             if (!hasInitialized)
@@ -81,43 +89,29 @@ namespace AdrianMiasik
                 return null;
             }
             
-            // If we have a renderer...
             if (renderer != null)
             {
-#if DISPLAY_MODEL_DEBUG_MODE
-                Debug.Log("Found a cached renderer component!");
-#endif
+                // Return cached renderer
                 return renderer;
             }
             
-#if DISPLAY_MODEL_DEBUG_MODE
-            Debug.LogWarning("Unable to find a cached renderer. Attempting to look for one now...");
-#endif
-            
-            // Grab renderer
             renderer = model.GetComponent<Renderer>();
             if (renderer != null)
             {
-#if DISPLAY_MODEL_DEBUG_MODE
-                Debug.Log("Found a renderer component within our spawned object!");
-#endif
+                // Return found renderer
                 return renderer;
             }
             
-#if DISPLAY_MODEL_DEBUG_MODE
-            Debug.LogWarning("Unable to find a renderer component. Attempting to create one now...");
-#endif            
-
-            // Create renderer
-            renderer = model.AddComponent<Renderer>();
+            // Fallback to mesh renderer
+            // TODO: Fallback support
+            renderer = model.AddComponent<MeshRenderer>();
             if (renderer != null)
             {
-#if DISPLAY_MODEL_DEBUG_MODE
-                Debug.Log("A renderer has been successfully created!");
-#endif
+                // Return created renderer
                 return renderer;
             }
     
+            // Assert
             Debug.LogAssertion("Failed to fetch you a renderer.");
             return null;
         }

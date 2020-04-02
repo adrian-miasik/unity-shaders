@@ -7,8 +7,9 @@ namespace AdrianMiasik
     public class DisplayCaseCarousel : MonoBehaviour
     {
         // References
-        [SerializeField] private DisplayCase displayCasePrefab = null;
+        [SerializeField] private DisplayCase displayPrefab = null;
         [SerializeField] private MaterialList materials = null;
+        [SerializeField] private GameObject modelPrefab = null;
         [SerializeField] private DisplayCaseSelector selector = null;
         
         // TODO: Create inspector which only shows this after init
@@ -42,7 +43,16 @@ namespace AdrianMiasik
                 return;
             }
             
-            displays = GenerateDisplays(displayCasePrefab, materials);
+            // Generate displays
+            displays = GenerateDisplays(displayPrefab, modelPrefab, materials.materials.Count);
+
+            // Swap materials on each model
+            for (int i = 0; i < displays.Count; i++)
+            {
+                DisplayCase display = displays[i];
+                display.ChangeModelMaterial(materials.materials[i]);
+            }
+
             targetPosition = transform.position;
             
             selector.Initialize(displays);
@@ -117,32 +127,31 @@ namespace AdrianMiasik
         }
 
         /// <summary>
-        /// Creates and returns a list of DisplayModel, one for each material in the list
+        /// Creates and returns a list of DisplayCases
         /// </summary>
-        /// <param name="_displayCasePrefab">The type of display you want to generate</param>
-        /// <param name="_list">The list of materials you want to apply for each model in each display case</param>
-        private List<DisplayCase> GenerateDisplays(DisplayCase _displayCasePrefab, MaterialList _list)
+        /// <param name="_displayPrefab">What display case do you want to generate?</param>
+        /// <param name="_modelToSpawnInside">What GameObject do you want to generate inside the display case?</param>
+        /// <param name="_quantity">How many displays would you like to generate?</param>
+        /// <returns></returns>
+        private List<DisplayCase> GenerateDisplays(DisplayCase _displayPrefab, GameObject _modelToSpawnInside, int _quantity)
         {
             List<DisplayCase> generatedDisplays = new List<DisplayCase>();
 
-            for (int i = 0; i < _list.materials.Count; i++)
+            for (int i = 0; i < _quantity; i++)
             {
                 // Create a display
-                DisplayCase displayCase = Instantiate(_displayCasePrefab, transform);
-                displayCase.Initialize(null, itemOffset);
+                DisplayCase displayCase = Instantiate(_displayPrefab, transform);
+                displayCase.Initialize(_modelToSpawnInside, itemOffset);
                 displayCase.GetDisplay().transform.position += displayOffset * i;
                 displayCase.onClick += OnDisplayWheelItemClick;
 
                 // Cache display
                 generatedDisplays.Add(displayCase);
-
-                // Change display item's material
-                displayCase.SwapMaterialOnModel(_list.materials[i]);
             }
 
             return generatedDisplays;
         }
-
+        
         public void NextDisplay()
         {
             selector.NextItem();

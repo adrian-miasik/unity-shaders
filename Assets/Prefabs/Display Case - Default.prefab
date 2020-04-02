@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 5453254471513368818}
   - component: {fileID: 254904282345760615}
   m_Layer: 0
-  m_Name: Display Case
+  m_Name: Display Case - Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   display: {fileID: 7161149801720474883}
   modelConstraintContainer: {fileID: 133484070091133756}
+  model: {fileID: 0}
 --- !u!1 &7161149801720474883
 GameObject:
   m_ObjectHideFlags: 0
