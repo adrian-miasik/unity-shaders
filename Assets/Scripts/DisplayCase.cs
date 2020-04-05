@@ -73,11 +73,16 @@ namespace AdrianMiasik
             GetModelRenderer().sharedMaterial = _material;
         }
         
-        public GameObject GetDisplay()
+        public void SetDisplayPosition(Vector3 _worldPosition)
         {
-            return display;
+            display.transform.position = _worldPosition;
         }
 
+        public Vector3 GetDisplayWorldPosition()
+        {
+            return display.transform.position;
+        }
+        
         public GameObject GetModel()
         {
             return model;

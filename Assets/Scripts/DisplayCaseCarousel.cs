@@ -21,7 +21,7 @@ namespace AdrianMiasik
         // TODO: Create inspector which makes this a read-only
         private bool isInitialized; 
         
-        private List<DisplayCase> displays = new List<DisplayCase>(); 
+        private readonly List<DisplayCase> displays = new List<DisplayCase>(); 
         private bool isAnimating;
         private Vector3 startPosition;
         private Vector3 endPosition;
@@ -46,10 +46,10 @@ namespace AdrianMiasik
             GenerateDisplays(displayPrefab, modelPrefab, materials.materials.Count);
 
             // Swap materials on each model
-            for (int i = 0; i < displays.Count; i++)
+            for (int _i = 0; _i < displays.Count; _i++)
             {
-                DisplayCase display = displays[i];
-                display.ChangeModelMaterial(materials.materials[i]);
+                DisplayCase _display = displays[_i];
+                _display.ChangeModelMaterial(materials.materials[_i]);
             }
 
             targetPosition = transform.position;
@@ -66,9 +66,9 @@ namespace AdrianMiasik
         [ContextMenu("Clean Up")]
         public void CleanUp()
         {
-            foreach (DisplayCase displayCase in displays)
+            foreach (DisplayCase _displayCase in displays)
             {
-                DestroyImmediate(displayCase.gameObject);
+                DestroyImmediate(_displayCase.gameObject);
             }
             
             Clear();
@@ -120,9 +120,9 @@ namespace AdrianMiasik
                 isAnimating = false;
             }
 
-            float t = accumulatedTime / animationDuration;
-            t = t * t * (3 - 2 * t); // Smoothstep formula
-            transform.position = Vector3.Lerp(startPosition, targetPosition + endPosition, t);
+            float _t = accumulatedTime / animationDuration;
+            _t = _t * _t * (3 - 2 * _t); // Smoothstep formula
+            transform.position = Vector3.Lerp(startPosition, targetPosition + endPosition, _t);
         }
 
         /// <summary>
@@ -136,16 +136,16 @@ namespace AdrianMiasik
         {
             displays.Clear();
 
-            for (int i = 0; i < _quantity; i++)
+            for (int _i = 0; _i < _quantity; _i++)
             {
                 // Create a display
-                DisplayCase displayCase = Instantiate(_displayPrefab, transform);
-                displayCase.Initialize(_modelToSpawnInside, itemOffset);
-                displayCase.GetDisplay().transform.position += displayOffset * i;
-                displayCase.onClick += OnDisplayWheelItemClick;
+                DisplayCase _displayCase = Instantiate(_displayPrefab, transform);
+                _displayCase.Initialize(_modelToSpawnInside, itemOffset);
+                _displayCase.SetDisplayPosition(_displayCase.GetDisplayWorldPosition() + displayOffset * _i);
+                _displayCase.onClick += OnDisplayWheelItemClick;
 
                 // Cache display
-                displays.Add(displayCase);
+                displays.Add(_displayCase);
             }
         }
         
@@ -173,7 +173,7 @@ namespace AdrianMiasik
         /// Returns the cached display cases
         /// </summary>
         /// <returns></returns>
-        public List<DisplayCase> GetDisplayCases()
+        public IEnumerable<DisplayCase> GetDisplayCases()
         {
             return displays;
         }
