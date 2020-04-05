@@ -77,6 +77,11 @@ namespace AdrianMiasik
         {
             return display;
         }
+
+        public GameObject GetModel()
+        {
+            return model;
+        }
         
         /// <summary>
         /// Returns the renderer component on the model GameObject
