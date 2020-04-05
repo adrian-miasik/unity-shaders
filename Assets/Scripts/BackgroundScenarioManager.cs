@@ -14,7 +14,7 @@ namespace AdrianMiasik
 
         [SerializeField] private ScenarioTypes scenario = ScenarioTypes.Skybox;
     
-        private readonly Color[] solidColors = {Color.black, Color.grey, Color.white};
+        [SerializeField] private Color[] solidColors = {Color.black, Color.grey, Color.white};
         private int currentColor;
     
         private void Start()
@@ -76,11 +76,11 @@ namespace AdrianMiasik
         /// <summary>
         /// Updates camera flags and sets the RenderSettings skybox to be desiredSkybox
         /// </summary>
-        /// <param name="desiredSkybox"></param>
-        private void InitializeSkybox(Material desiredSkybox)
+        /// <param name="_desiredSkybox"></param>
+        private void InitializeSkybox(Material _desiredSkybox)
         {
             InitializeSkybox();
-            RenderSettings.skybox = desiredSkybox;
+            RenderSettings.skybox = _desiredSkybox;
         }
     
         private void InitializeSolidColor(Color _color)
@@ -102,10 +102,10 @@ namespace AdrianMiasik
         /// <summary>
         /// Increment/decrement our currentColor index while staying within the bounds of our array by wrapping.
         /// </summary>
-        /// <param name="difference"></param>
-        private void ChangeColorSelection(int difference)
+        /// <param name="_difference"></param>
+        private void ChangeColorSelection(int _difference)
         {
-            currentColor += difference;
+            currentColor += _difference;
             currentColor = (currentColor + solidColors.Length) % solidColors.Length;
 
             SetCameraBackground(GetSolidColor(currentColor));
