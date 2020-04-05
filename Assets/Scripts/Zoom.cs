@@ -24,7 +24,7 @@ namespace AdrianMiasik
             orbitCamera.SetZoomDistance(currentZoom);
         }
 
-        private float FetchInput()
+        private static float FetchInput()
         {
             return Input.GetAxis("Mouse ScrollWheel") * -1;
         }
