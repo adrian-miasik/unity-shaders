@@ -12,10 +12,7 @@ namespace AdrianMiasik{
         [SerializeField] private float initializationStagger = 0.1f;
 
         private int index = 0;
-        private float accumulatedTime = 0;
-        private bool isInitialized = false;
-        private bool isStaggerComplete = false;
-        
+
         private void Start()
         {
             SetupEnvironment();
@@ -31,38 +28,20 @@ namespace AdrianMiasik{
             // Grab our shader model references
             GetShaderModels(standardCarousel);
             GetShaderModels(shaderGraphCarousel);
-            
-            isInitialized = true;
+
+            StaggerShaderModels();
         }
 
-        private void Update()
+        private void StaggerShaderModels()
         {
-            if (!isInitialized || isStaggerComplete)
+            foreach (ShaderModel _shaderModel in allShaderModels)
             {
-                return;
-            }
-            
-            accumulatedTime += Time.deltaTime;
-
-            // TODO: Stagger all hover scripts on start
-            while (accumulatedTime > initializationStagger)
-            {
-                allShaderModels[index].Initialize();
+                _shaderModel.Initialize();
+                _shaderModel.SetTimeOffset(initializationStagger * index);
                 index++;
-                accumulatedTime -= initializationStagger;
-
-                // If there is more objects to iterate through...
-                if (index < allShaderModels.Count - 1)
-                {
-                    continue;
-                }
-                
-                // Stagger complete
-                accumulatedTime = 0;
-                isStaggerComplete = true;
             }
         }
-
+        
         /// <summary>
         /// Attempts to fetch and cache the ShaderModel objects found in the provided carousel. If no ShaderModel object is
         /// found within the provided carousel, we will not cache that specific ShaderModel.

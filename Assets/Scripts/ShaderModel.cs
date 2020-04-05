@@ -15,11 +15,11 @@ namespace AdrianMiasik
             }
         }
 
-        public void SetHoverOffset(float _heightOffset)
+        public void SetTimeOffset(float _heightOffset)
         {
             if (hover != null)
             {
-                hover.SetHeightOffset(_heightOffset);
+                hover.OffsetHoverTime(_heightOffset);
             }
         }
     }
