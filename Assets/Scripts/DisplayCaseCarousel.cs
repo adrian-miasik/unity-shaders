@@ -168,5 +168,14 @@ namespace AdrianMiasik
         {
             displayCaseSelector.Select(_displayCase);
         }
+
+        /// <summary>
+        /// Returns the cached display cases
+        /// </summary>
+        /// <returns></returns>
+        public List<DisplayCase> GetDisplayCases()
+        {
+            return displays;
+        }
     }
 }
