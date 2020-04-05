@@ -47,7 +47,7 @@ namespace AdrianMiasik
             currentIndex = 0;
             currentItem = items[currentIndex];
             
-            ChangeItem(currentItem);
+            ChangeSelection(currentItem);
         }
         
         /// <summary>
@@ -56,9 +56,9 @@ namespace AdrianMiasik
         /// <param name="_allSelectionItems"></param>
         public void Initialize(IEnumerable<T> _allSelectionItems)
         {
-            foreach (T item in _allSelectionItems)
+            foreach (T _item in _allSelectionItems)
             {
-                items.Add(item);
+                items.Add(_item);
             }
 
             Initialize();
@@ -94,7 +94,7 @@ namespace AdrianMiasik
         }
         
         /// <summary>
-        /// Disables the current item and enables the previous item in the list.
+        /// Selects the previous item in the collection
         /// </summary>
         public void PreviousItem()
         {
@@ -103,7 +103,7 @@ namespace AdrianMiasik
         }
 
         /// <summary>
-        /// Disables the current item and enables the next item in the list.
+        /// Selects the next item in the collection
         /// </summary>
         public void NextItem()
         {
@@ -114,10 +114,10 @@ namespace AdrianMiasik
         /// <summary>
         /// Increment/decrement our current index while staying within the bounds of our list by wrapping.
         /// </summary>
-        /// <param name="difference"></param>
-        private void ChangeIndex(int difference)
+        /// <param name="_difference"></param>
+        private void ChangeIndex(int _difference)
         {
-            currentIndex += difference;
+            currentIndex += _difference;
             currentIndex = (currentIndex + items.Count) % items.Count;
         }
         
@@ -133,18 +133,15 @@ namespace AdrianMiasik
                 return false;
             }
 
-            ChangeItem(_itemInList);
+            ChangeSelection(_itemInList);
             return true;
         }
 
         /// <summary>
-        /// If your index is valid, we will set the current item to that index and return true.
-        /// Otherwise we will return false.
+        /// If your index is valid, we will set the current item to the object at the provided index and return true.
+        /// Otherwise we will only return false. (No current item change)
         /// </summary>
         /// <param name="_index"></param>
-        /// <returns>
-        /// If we were able to set the current item successfully, we will return True. Otherwise we return false.
-        /// </returns>
         private bool Select(int _index)
         {
             if (!IsIndexValid(_index))
@@ -153,7 +150,7 @@ namespace AdrianMiasik
                 return false;
             }
 
-            ChangeItem(items[_index]);
+            ChangeSelection(items[_index]);
             return true;
         }
 
@@ -167,7 +164,7 @@ namespace AdrianMiasik
             return _index >= 0 && _index < items.Count;
         }
         
-        private void ChangeItem(T _itemInList)
+        private void ChangeSelection(T _itemInList)
         {
             // Deselect
             lastSelectedItem = currentItem;
