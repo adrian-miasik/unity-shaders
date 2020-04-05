@@ -12,7 +12,7 @@ namespace AdrianMiasik
         private Vector3 startingPosition;
         private Vector3 targetPosition;
         private bool isInitialized = false;
-
+        
         public void Initialize()
         {
             startingPosition = transform.localPosition;
@@ -30,6 +30,11 @@ namespace AdrianMiasik
             
             targetPosition = startingPosition + (Vector3.up * heightOffset);
             transform.localPosition = targetPosition + (Vector3.up * (Mathf.Sin(accumulatedTime * speed) * amplitude));
+        }
+
+        public void SetHeightOffset(float _heightOffset)
+        {
+            heightOffset = _heightOffset;
         }
     }
 }
