@@ -179,7 +179,7 @@ MonoBehaviour:
   materials: {fileID: 11400000, guid: 0f5c62d0b53c29a4d88e055eb5d1fe99, type: 2}
   modelPrefab: {fileID: 1534052181436820808, guid: 127dfea768b4a4a44a0f9da54314aa8c,
     type: 3}
-  selector: {fileID: 96782216}
+  displayCaseSelector: {fileID: 96782216}
   targetPosition: {x: 0, y: 0, z: 0}
   itemOffset: {x: 0, y: 1, z: 0}
   displayOffset: {x: 3, y: 0, z: 0}
@@ -327,6 +327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   standardCarousel: {fileID: 96782217}
   shaderGraphCarousel: {fileID: 2018496270}
+  allShaderModels: []
+  initializationStagger: 0.2
 --- !u!1 &646206718
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,7 +723,7 @@ Transform:
   m_GameObject: {fileID: 1525411802}
   m_LocalRotation: {x: 0.6532815, y: -0.27059805, z: 0.27059805, w: 0.6532815}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0000002, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1296,12 +1298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3643271abc6c24d438d47046aef673bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPrefab: {fileID: 1440162367448148318, guid: cd448f909e7347d47854736042ab5aa7,
+  displayPrefab: {fileID: 254904282345760615, guid: dbc8f14d0eae14449af9e6a606a96978,
     type: 3}
   materials: {fileID: 11400000, guid: 490cd51bff89d754ca5e9475ac05455a, type: 2}
   modelPrefab: {fileID: 1534052181436820808, guid: 127dfea768b4a4a44a0f9da54314aa8c,
     type: 3}
-  selector: {fileID: 2018496269}
+  displayCaseSelector: {fileID: 2018496269}
   targetPosition: {x: 0, y: 0, z: 3}
   itemOffset: {x: 0, y: 1, z: 0}
   displayOffset: {x: 3, y: 0, z: 0}
