@@ -70,19 +70,6 @@ namespace AdrianMiasik
             currentItem = null;
         }
         
-        protected void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                PreviousItem();
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                NextItem();
-            }
-        }
-        
         public void AddItem(T _item)
         {
             items.Add(_item);
