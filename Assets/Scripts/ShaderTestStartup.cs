@@ -51,12 +51,15 @@ namespace AdrianMiasik{
                 index++;
                 accumulatedTime -= initializationStagger;
 
-                if (index >= allShaderModels.Count - 1)
+                // If there is more objects to iterate through...
+                if (index < allShaderModels.Count - 1)
                 {
-                    accumulatedTime = 0;
-                    isStaggerComplete = true;
-                    Debug.LogWarning("Stagger is completed");
+                    continue;
                 }
+                
+                // Stagger complete
+                accumulatedTime = 0;
+                isStaggerComplete = true;
             }
         }
 
@@ -64,16 +67,16 @@ namespace AdrianMiasik{
         /// Attempts to fetch and cache the ShaderModel objects found in the provided carousel. If no ShaderModel object is
         /// found within the provided carousel, we will not cache that specific ShaderModel.
         /// </summary>
-        /// <param name="carousel"></param>
-        private void GetShaderModels(DisplayCaseCarousel carousel)
+        /// <param name="_carousel"></param>
+        private void GetShaderModels(DisplayCaseCarousel _carousel)
         {
-            foreach (DisplayCase displayCase in carousel.GetDisplayCases())
+            foreach (DisplayCase _displayCase in _carousel.GetDisplayCases())
             {
-                ShaderModel shaderModel = displayCase.GetModel().GetComponent<ShaderModel>();
+                ShaderModel _shaderModel = _displayCase.GetModel().GetComponent<ShaderModel>();
 
-                if (shaderModel != null)
+                if (_shaderModel != null)
                 {
-                    allShaderModels.Add(shaderModel);
+                    allShaderModels.Add(_shaderModel);
                 }
             }
         }
