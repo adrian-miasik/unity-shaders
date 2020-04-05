@@ -14,5 +14,13 @@ namespace AdrianMiasik
                 hover.Initialize();
             }
         }
+
+        public void SetHoverOffset(float _heightOffset)
+        {
+            if (hover != null)
+            {
+                hover.SetHeightOffset(_heightOffset);
+            }
+        }
     }
 }
