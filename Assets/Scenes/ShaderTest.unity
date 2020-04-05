@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1693195262}
-  _selector: {fileID: 96782217}
+  selector: {fileID: 96782217}
 --- !u!114 &1693195262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1226,6 +1226,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1968312477}
   scenario: 0
+  solidColors:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1968312480
 MonoBehaviour:
   m_ObjectHideFlags: 0
