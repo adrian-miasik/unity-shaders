@@ -7,7 +7,7 @@ namespace AdrianMiasik
     {
         [SerializeField] private string url = string.Empty;
         
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData _eventData)
         {
             Application.OpenURL(url);
         }
