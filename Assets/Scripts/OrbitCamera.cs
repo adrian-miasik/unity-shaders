@@ -52,21 +52,21 @@ namespace AdrianMiasik
 
         private Vector2 FetchInput()
         {
-            Vector2 result = Vector2.zero;
+            Vector2 _result = Vector2.zero;
             
-            result += new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+            _result += new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
             
             if (Input.GetMouseButton(1))
             {
-                result += new Vector2(Input.GetAxis("Mouse Y") * -1, Input.GetAxis("Mouse X") * -1);
+                _result += new Vector2(Input.GetAxis("Mouse Y") * -1, Input.GetAxis("Mouse X") * -1);
             }
 
             if (autoSpin)
             {
-                result += spinDirection * spinSpeed;
+                _result += spinDirection * spinSpeed;
             }
 
-            return result;
+            return _result;
         }
         
         private void MoveCamera(Vector2 _inputVector)
@@ -74,9 +74,9 @@ namespace AdrianMiasik
             rotation = Quaternion.Euler(_inputVector.x, -_inputVector.y, 0);
             zoom = new Vector3(0,0, -distanceFromTarget); // Top down camera
 
-            Vector3 targetPoint = cameraTarget.transform.position + positionOffset;
-            camera.transform.position = rotation * zoom + targetPoint;
-            camera.transform.LookAt(targetPoint);
+            Vector3 _targetPoint = cameraTarget.transform.position + positionOffset;
+            camera.transform.position = rotation * zoom + _targetPoint;
+            camera.transform.LookAt(_targetPoint);
         }
 
         public void SetZoomDistance(float _desiredZoom)
