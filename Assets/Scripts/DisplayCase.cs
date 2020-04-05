@@ -42,9 +42,9 @@ namespace AdrianMiasik
         /// </summary>
         /// <summary>
         /// Note: If no model is provided we will use a fallback gameobject instead
-        /// </summary>>
-        /// <param name="_modelToSpawn"></param>
-        /// <param name="_modelLocalPos"></param>
+        /// </summary>
+        /// <param name="_modelToSpawn">What gameobject would you like to spawn inside the display case?</param>
+        /// <param name="_modelLocalPos">New local position of the model inside the display case</param>
         private void SpawnModel(GameObject _modelToSpawn, Vector3 _modelLocalPos)
         {
             if (_modelToSpawn == null)
@@ -108,7 +108,7 @@ namespace AdrianMiasik
             }
             
             // Fallback to mesh renderer
-            // TODO: Fallback support
+            // TODO: Better fallback support
             renderer = model.AddComponent<MeshRenderer>();
             if (renderer != null)
             {
@@ -116,12 +116,11 @@ namespace AdrianMiasik
                 return renderer;
             }
     
-            // Assert
             Debug.LogAssertion("Failed to fetch you a renderer.");
             return null;
         }
         
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData _eventData)
         {
             onClick?.Invoke(this);
         }
