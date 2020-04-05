@@ -6,7 +6,7 @@ namespace AdrianMiasik
     {
         [Header("Optional")]
         [SerializeField] private Hover hover = null;
-            
+        
         public void Initialize()
         {
             if (hover != null)
