@@ -69,5 +69,12 @@ namespace AdrianMiasik{
             allShaderModels.Clear();
             index = 0;
         }
+
+        [ContextMenu("Rebuild Environment")]
+        private void RebuildEnvironment()
+        {
+            CleanUpEnvironment();
+            SetupEnvironment();
+        }
     }
 }
