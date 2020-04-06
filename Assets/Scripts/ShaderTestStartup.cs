@@ -65,6 +65,9 @@ namespace AdrianMiasik{
         {
             standardCarousel.CleanUp();
             shaderGraphCarousel.CleanUp();
+            
+            allShaderModels.Clear();
+            index = 0;
         }
     }
 }
