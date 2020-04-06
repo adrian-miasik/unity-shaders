@@ -31,16 +31,6 @@ namespace AdrianMiasik{
 
             StaggerShaderModels();
         }
-
-        private void StaggerShaderModels()
-        {
-            foreach (ShaderModel _shaderModel in allShaderModels)
-            {
-                _shaderModel.Initialize();
-                _shaderModel.SetTimeOffset(initializationStagger * index);
-                index++;
-            }
-        }
         
         /// <summary>
         /// Attempts to fetch and cache the ShaderModel objects found in the provided carousel. If no ShaderModel object is
@@ -60,6 +50,16 @@ namespace AdrianMiasik{
             }
         }
         
+        private void StaggerShaderModels()
+        {
+            foreach (ShaderModel _shaderModel in allShaderModels)
+            {
+                _shaderModel.Initialize();
+                _shaderModel.SetTimeOffset(initializationStagger * index);
+                index++;
+            }
+        }
+
         [ContextMenu("Quit Environment")]
         private void CleanUpEnvironment()
         {
