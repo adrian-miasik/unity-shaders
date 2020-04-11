@@ -20,15 +20,13 @@
             struct appdata
             {
                 float4 vertex : POSITION;
-                float3 normal : NORMAL;
-                float3 uvs : TEXCOORD0;
+                float3 uv : TEXCOORD0;
             };
 
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                float3 normal : NORMAL;
-                float3 uvs : TEXCOORD0;
+                float3 uv : TEXCOORD0;
             };
 
             float4 _TopColor;
@@ -38,14 +36,13 @@
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.normal = v.normal;
-                o.uvs = v.uvs;
+                o.uv = v.uv;
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float3 blend = lerp(_BottomColor, _TopColor, i.uvs.y);
+                float3 blend = lerp(_BottomColor, _TopColor, i.uv.y);
                 return float4(blend, 1);
             }
             ENDCG
