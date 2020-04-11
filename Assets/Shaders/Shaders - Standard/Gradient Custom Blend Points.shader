@@ -4,8 +4,8 @@
     {
         _TopColor("Top Color", Color) = (1,1,1,1)
         _BottomColor("Bottom Color", Color) = (0,0,0,1)
-        _MaxValue("Max Value", Range(0,1)) = 0.7
-        _MinValue("Min Value", Range(0,1)) = 0.3
+        _MaxValue("Max Value", Range(0,1)) = 0.75
+        _MinValue("Min Value", Range(0,1)) = 0.25
     }
     SubShader
     {
@@ -22,15 +22,13 @@
             struct appdata
             {
                 float4 vertex : POSITION;
-                float3 normal : NORMAL;
-                float3 uvs : TEXCOORD0;
+                float3 uv : TEXCOORD0;
             };
 
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                float3 normal : NORMAL;
-                float3 uvs : TEXCOORD0;
+                float3 uv : TEXCOORD0;
             };
 
             float4 _TopColor;
@@ -38,23 +36,17 @@
             float _MaxValue;
             float _MinValue;
             
-            float InverseLerp(float a, float b, float target)
-            {
-                return (target - a)/(b-a);
-            }
-
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.normal = v.normal;
-                o.uvs = v.uvs;
+                o.uv = v.uv;
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float t = smoothstep(_MinValue, _MaxValue,  i.uvs.y);
+                float t = smoothstep(_MinValue, _MaxValue,  i.uv.y);
                 float3 blend = lerp(_BottomColor, _TopColor, t);
                 return float4(blend, 1);
             }
