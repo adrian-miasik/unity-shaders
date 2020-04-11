@@ -7,7 +7,7 @@
     }
     SubShader
     {
-        Tags { "Queue"="Transparent" }
+        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
 
         Pass
         {
@@ -27,19 +27,19 @@
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
+            float4 _MainTex_ST; // Needed for tiling and offset
             float4 _MainColor;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
 
