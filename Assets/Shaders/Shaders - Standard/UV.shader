@@ -1,10 +1,5 @@
 ﻿Shader "AdrianMiasik/Examples/UV"
 {
-    Properties
-    {
-        _MainTex ("Texture", 2D) = "white" {}
-        _MainColor("Color", Color) = (1,1,1,1)
-    }
     SubShader
     {
         Tags { "RenderType"="Opaque" }
@@ -28,11 +23,6 @@
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
             };
-
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            
-            float4 _MainColor;
 
             v2f vert (appdata v)
             {
