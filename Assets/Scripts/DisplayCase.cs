@@ -14,7 +14,7 @@ namespace AdrianMiasik
         [SerializeField] private GameObject model;
         
         private new Renderer renderer;
-        private const PrimitiveType primitiveFallback = PrimitiveType.Sphere;
+        private const PrimitiveType primitiveFallback = PrimitiveType.Sphere; // TODO: Store in user settings
         private bool hasInitialized;
 
         public delegate void OnClick(DisplayCase _clickedCase);
