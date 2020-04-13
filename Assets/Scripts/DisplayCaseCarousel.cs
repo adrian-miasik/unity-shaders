@@ -12,16 +12,14 @@ namespace AdrianMiasik
         [SerializeField] private DisplayCaseSelector displayCaseSelector = null;
         
         // TODO: Create inspector which only shows this after init
-        [SerializeField] private Vector3 targetPosition; // Position where we want the selected object to go to 
-        
+        [SerializeField] private Vector3 targetPosition = Vector3.zero; // Position where we want the selected object to go to
         [SerializeField] private Vector3 itemOffset = Vector3.up; // How much to offset the model inside the display case?
         [SerializeField] private Vector3 displayOffset = Vector3.right; // How much to offset the entire display case?
         [SerializeField] private float animationDuration = 0.5f;
         
         // TODO: Create inspector which makes this a read-only
-        private bool isInitialized; 
-        
-        private readonly List<DisplayCase> displays = new List<DisplayCase>(); 
+        private bool isInitialized;
+        private readonly List<DisplayCase> displays = new List<DisplayCase>();
         private bool isAnimating;
         private Vector3 startPosition;
         private Vector3 endPosition;
@@ -42,7 +40,6 @@ namespace AdrianMiasik
                 return;
             }
             
-            // Generate displays
             GenerateDisplays(displayPrefab, modelPrefab, materials.materials.Count);
 
             // Swap materials on each model
@@ -56,7 +53,7 @@ namespace AdrianMiasik
             
             displayCaseSelector.Initialize(displays);
             displayCaseSelector.onSelectionChange += OnSelectionChange;
-            
+
             isInitialized = true;
         }
 
@@ -142,7 +139,7 @@ namespace AdrianMiasik
                 DisplayCase _displayCase = Instantiate(_displayPrefab, transform);
                 _displayCase.Initialize(_modelToSpawnInside, itemOffset);
                 _displayCase.SetDisplayPosition(_displayCase.GetDisplayWorldPosition() + displayOffset * _i);
-                _displayCase.onClick += OnDisplayWheelItemClick;
+                _displayCase.onClick += OnDisplayCaseClick;
 
                 // Cache display
                 displays.Add(_displayCase);
@@ -164,7 +161,7 @@ namespace AdrianMiasik
             return displayCaseSelector.GetCurrentItem();
         }
 
-        private void OnDisplayWheelItemClick(DisplayCase _displayCase)
+        private void OnDisplayCaseClick(DisplayCase _displayCase)
         {
             displayCaseSelector.Select(_displayCase);
         }
