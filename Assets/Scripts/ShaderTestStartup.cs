@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace AdrianMiasik{
@@ -11,7 +10,7 @@ namespace AdrianMiasik{
         [SerializeField] private List<ShaderModel> allShaderModels = new List<ShaderModel>();
         [SerializeField] private float initializationStagger = 0.1f;
 
-        private int index = 0;
+        private int index;
 
         private void Start()
         {
@@ -49,7 +48,10 @@ namespace AdrianMiasik{
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Staggers all our cached shader models so they all hover at different times on init
+        /// </summary>
         private void StaggerShaderModels()
         {
             foreach (ShaderModel _shaderModel in allShaderModels)
