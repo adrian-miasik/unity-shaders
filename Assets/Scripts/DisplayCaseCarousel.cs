@@ -125,6 +125,15 @@ namespace AdrianMiasik
             transform.position = Vector3.Lerp(startPosition, targetPosition + endPosition, _t);
         }
 
+        // TODO: Utilize
+        public void SetTargetPosition(Vector3 _targetPosition)
+        {
+            startPosition = transform.position;
+            targetPosition = _targetPosition;
+            isAnimating = true;
+            accumulatedTime = 0;
+        }
+
         /// <summary>
         /// Creates and caches a list of DisplayCases
         /// </summary>

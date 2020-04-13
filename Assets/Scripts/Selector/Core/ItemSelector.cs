@@ -46,8 +46,6 @@ namespace AdrianMiasik
         {
             currentIndex = 0;
             currentItem = items[currentIndex];
-
-            ChangeSelection(currentItem);
         }
 
         /// <summary>

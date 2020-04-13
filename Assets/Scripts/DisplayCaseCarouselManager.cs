@@ -30,6 +30,11 @@ namespace AdrianMiasik
             }
 
             Debug.Log("Previous: " +_previousCarousel + " and current:" + _currentCarousel);
+
+            // TODO: Remove placeholder
+            // PLACEHOLDER
+            _previousCarousel.SetTargetPosition(Vector3.forward * 3f);
+            _currentCarousel.SetTargetPosition(Vector3.zero);
         }
 
         private void OnCarouselClick(DisplayCaseCarousel _clickedCarousel)

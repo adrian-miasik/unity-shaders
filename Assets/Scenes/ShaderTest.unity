@@ -127,8 +127,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 96782215}
-  - component: {fileID: 96782216}
   - component: {fileID: 96782217}
+  - component: {fileID: 96782216}
   m_Layer: 0
   m_Name: Shaders - Standard
   m_TagString: Untagged
@@ -177,7 +177,7 @@ MonoBehaviour:
   displayPrefab: {fileID: 254904282345760615, guid: dbc8f14d0eae14449af9e6a606a96978,
     type: 3}
   materials: {fileID: 11400000, guid: 0f5c62d0b53c29a4d88e055eb5d1fe99, type: 2}
-  modelPrefab: {fileID: 2146552938140608873, guid: f48bc7d819fbff340a18f381bb14761b,
+  modelPrefab: {fileID: 5065609162872585356, guid: 4313dc3956a9d914bab68dceb7e1bb78,
     type: 3}
   displayCaseSelector: {fileID: 96782216}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -325,8 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9602e08a821f0784b8a9c83b801d5369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardCarousel: {fileID: 96782217}
-  shaderGraphCarousel: {fileID: 2018496270}
+  carouselManager: {fileID: 2019735288}
   allShaderModels: []
   initializationStagger: 0.4
 --- !u!1 &646206718
@@ -1308,7 +1307,7 @@ MonoBehaviour:
   modelPrefab: {fileID: 2146552938140608873, guid: f48bc7d819fbff340a18f381bb14761b,
     type: 3}
   displayCaseSelector: {fileID: 2018496269}
-  targetPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 3}
   itemOffset: {x: 0, y: 1, z: 0}
   displayOffset: {x: 3, y: 0, z: 0}
   animationDuration: 0.5
@@ -1321,6 +1320,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2019735287}
+  - component: {fileID: 2019735289}
+  - component: {fileID: 2019735288}
   m_Layer: 0
   m_Name: Display Case Carousels
   m_TagString: Untagged
@@ -1344,6 +1345,34 @@ Transform:
   m_Father: {fileID: 133244376}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2019735288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019735286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090fed7c032d2714d9766a1e40a5974a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carouselSelector: {fileID: 2019735289}
+--- !u!114 &2019735289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019735286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abc3583971ee5742a866cc5e43d9c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingCarousels:
+  - {fileID: 96782217}
+  - {fileID: 2018496270}
 --- !u!1 &2071361772
 GameObject:
   m_ObjectHideFlags: 0
