@@ -8,9 +8,9 @@ namespace AdrianMiasik
     /// A class that keeps track of our current (and previous) selection in a collection
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ItemSelector<T> : MonoBehaviour where T : class
+    public class ItemSelector<T> : MonoBehaviour
     {
-        [SerializeField] private Collection<T> items = new Collection<T>();
+        [SerializeField] protected Collection<T> items = new Collection<T>();
 
         private T currentItem;
         private int currentIndex;
@@ -38,18 +38,18 @@ namespace AdrianMiasik
         /// <param name="_deselectedItem"></param>
         public delegate void OnDeselected(T _deselectedItem);
         public OnDeselected onDeselected;
-        
+
         /// <summary>
         /// Initializes with the serialized list
         /// </summary>
-        public void Initialize()
+        private void Initialize()
         {
             currentIndex = 0;
             currentItem = items[currentIndex];
-            
+
             ChangeSelection(currentItem);
         }
-        
+
         /// <summary>
         /// Initializes with a specific set of objects
         /// </summary>
@@ -67,7 +67,7 @@ namespace AdrianMiasik
         public void Clear()
         {
             items.Clear();
-            currentItem = null;
+            currentItem = default;
         }
         
         public void AddItem(T _item)
@@ -188,6 +188,11 @@ namespace AdrianMiasik
         public T GetLastSelectedItem()
         {
             return lastSelectedItem;
+        }
+
+        public Collection<T> GetItems()
+        {
+            return items;
         }
     }
 }

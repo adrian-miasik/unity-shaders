@@ -4,8 +4,7 @@ using UnityEngine;
 namespace AdrianMiasik{
     public class ShaderTestStartup : MonoBehaviour
     {
-        [SerializeField] private DisplayCaseCarousel standardCarousel = null;
-        [SerializeField] private DisplayCaseCarousel shaderGraphCarousel = null;
+        [SerializeField] private DisplayCaseCarouselManager carouselManager = null;
 
         [SerializeField] private List<ShaderModel> allShaderModels = new List<ShaderModel>();
         [SerializeField] private float initializationStagger = 0.1f;
@@ -20,13 +19,14 @@ namespace AdrianMiasik{
         [ContextMenu("Start Environment")]
         private void SetupEnvironment()
         {
-            // Initialize our carousels
-            standardCarousel.Initialize();
-            shaderGraphCarousel.Initialize();
+            // Initialize our carousel manager
+            carouselManager.Initialize();
 
             // Grab our shader model references
-            GetShaderModels(standardCarousel);
-            GetShaderModels(shaderGraphCarousel);
+            foreach (DisplayCaseCarousel _carousel in carouselManager.GetCarousels())
+            {
+                GetShaderModels(_carousel);
+            }
 
             StaggerShaderModels();
         }
@@ -65,8 +65,7 @@ namespace AdrianMiasik{
         [ContextMenu("Quit Environment")]
         private void CleanUpEnvironment()
         {
-            standardCarousel.CleanUp();
-            shaderGraphCarousel.CleanUp();
+            carouselManager.CleanUp();
             
             allShaderModels.Clear();
             index = 0;

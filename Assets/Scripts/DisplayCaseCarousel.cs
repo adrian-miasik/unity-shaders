@@ -30,7 +30,10 @@ namespace AdrianMiasik
         /// </summary>
         public delegate void OnDisplayChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay);
         public OnDisplayChange onDisplayChange;
-        
+
+        public delegate void OnClick(DisplayCaseCarousel _clickedCarousel);
+        public OnClick onClick;
+
         [ContextMenu("Initialize")]
         public void Initialize()
         {
@@ -164,6 +167,7 @@ namespace AdrianMiasik
         private void OnDisplayCaseClick(DisplayCase _displayCase)
         {
             displayCaseSelector.Select(_displayCase);
+            onClick?.Invoke(this);
         }
 
         /// <summary>
