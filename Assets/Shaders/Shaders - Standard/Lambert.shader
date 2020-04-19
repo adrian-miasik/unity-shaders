@@ -2,7 +2,6 @@
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
         _MainColor("Color", Color) = (1,1,1,1)
         _AmbientLight("Ambient Light", Color) = (0.0,0.075,0.15, 1)
     }
@@ -31,7 +30,6 @@
                 float3 normal : NORMAL;
             };
 
-            sampler2D _MainTex;
             float4 _MainColor;
             float4 _AmbientLight;
 
@@ -47,11 +45,11 @@
             {
                 // Direct light
                 float3 lightSource = _WorldSpaceLightPos0.xyz;
-                float lightFalloff = max(0, dot(lightSource, i.normal)); // 0f to 1f                 
+                float lightFalloff = max(0, dot(lightSource, i.normal)); // 0f to 1f     
                 float3 directDiffuseLight = _LightColor0 * lightFalloff;
                 
                 // Composite
-                float3 diffuseLight = _AmbientLight + directDiffuseLight;
+                float3 diffuseLight = directDiffuseLight + _AmbientLight;
                 float3 result = diffuseLight * _MainColor;
                                
                 return float4(result, 1);
