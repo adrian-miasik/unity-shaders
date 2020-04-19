@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Camera Based Outline
+  m_Name: Specular Cell Shade With Outline
   m_Shader: {fileID: 4800000, guid: 7b3a3de7d2ca2e248bc8fcb2321d9934, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -60,10 +60,12 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Gloss: 175
+    - _Gloss: 15
     - _GlossMapScale: 1
+    - _GlossStepFalloff: 0.1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LightStepFalloff: 0.1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -72,7 +74,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _Width: 0.005
+    - _Width: 0.0025
     - _ZWrite: 1
     m_Colors:
     - _AmbientLight: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
