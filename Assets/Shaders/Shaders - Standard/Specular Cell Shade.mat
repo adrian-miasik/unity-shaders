@@ -24,7 +24,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _DirectLightStep: 0.1
     - _Gloss: 20
+    - _GlossStepFalloff: 0.1
+    - _LightFalloffClamp: 0.1
+    - _LightStepFalloff: 0.1
+    - _PhongFalloffClamp: 0.1
+    - _PhongStepFalloff: 0.1
+    - _SpecularStepFalloff: 0.1
     m_Colors:
     - _AmbientLight: {r: 0.128649, g: 0.26238486, b: 0.5566038, a: 1}
     - _MainColor: {r: 1, g: 0.1462264, b: 0.1462264, a: 1}
