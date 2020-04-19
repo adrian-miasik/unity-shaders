@@ -2,7 +2,6 @@
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
         _MainColor("Color", Color) = (1,1,1,1)
         _AmbientLight("Ambient Light", Color) = (0.0,0.075,0.15, 1)
         _Gloss("Gloss", float) = 1
@@ -33,7 +32,6 @@
                 float3 worldPosition : TEXCOORD0;
             };
 
-            sampler2D _MainTex;
             float4 _MainColor;
             float4 _AmbientLight;
             float _Gloss;
@@ -50,7 +48,7 @@
             fixed4 frag (v2f i) : SV_Target
             {            
                 // General
-                float3 normal = normalize(i.normal); // Interpolated
+                float3 normal = normalize(i.normal);
                 float3 fragmentToCamera = _WorldSpaceCameraPos - i.worldPosition;
                 float3 viewDirection = normalize(fragmentToCamera);
                 
@@ -62,7 +60,7 @@
                 // Phong
                 float3 viewReflect = reflect(-viewDirection, normal);
                 float specularFalloff = max(0,dot(viewReflect, lightSource));
-                specularFalloff = pow(specularFalloff, _Gloss); // Add glosss
+                specularFalloff = pow(specularFalloff, _Gloss); // Add gloss
                 float4 directSpecularLight = specularFalloff * _LightColor0;
                 
                 // Composite
