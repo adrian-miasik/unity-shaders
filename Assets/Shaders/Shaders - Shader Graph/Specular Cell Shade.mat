@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Specular Cell Shade
-  m_Shader: {fileID: 4800000, guid: 5fc77a53f9959fc439183ca70dbe8883, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0683210d22436864f98937a1f9f38da0, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -45,6 +45,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_21D67614: 15
+    - Vector1_7034BD33: 0.1
+    - Vector1_D1D3267B: 0.1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

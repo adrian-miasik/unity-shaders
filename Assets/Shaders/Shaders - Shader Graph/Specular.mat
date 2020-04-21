@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Specular
-  m_Shader: {fileID: 4800000, guid: 0683210d22436864f98937a1f9f38da0, type: 3}
+  m_Shader: {fileID: 4800000, guid: 16d2aae25c2bf9c47b1fe45acea8c1ca, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -21,6 +21,8 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - Vector1_21D67614: 15
+    - Vector1_7034BD33: 0.1
+    - Vector1_D1D3267B: 0.1
     m_Colors:
     - Color_B12E4094: {r: 1, g: 0.14509805, b: 0.14509805, a: 1}
     - Color_E89E9B0D: {r: 0.12941177, g: 0.2627451, b: 0.5568628, a: 1}
