@@ -1,4 +1,4 @@
-﻿Shader "AdrianMiasik/Examples/Specular Cartoon With Outline"
+﻿Shader "AdrianMiasik/Examples/Camera Based Outline"
 {
     Properties
     {
