@@ -1,14 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace AdrianMiasik
 {
     public class OpenURLOnClick : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private string url;
+        [SerializeField] private string url = string.Empty;
         
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData _eventData)
         {
             Application.OpenURL(url);
         }

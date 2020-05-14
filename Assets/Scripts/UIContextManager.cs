@@ -1,37 +1,30 @@
-﻿using System;
-using AdrianMiasik;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
-public class UIContextManager : MonoBehaviour
+namespace AdrianMiasik
 {
-    [SerializeField] private TMP_Text text;
-
-    [SerializeField] private GameObjectSwitcher switcher;
-
-    private void Start()
+    public class UIContextManager : MonoBehaviour
     {
-        text.enabled = false;
-        switcher.onGameObjectSwitch += OnGameObjectSwitch;
-    }
-    
-    private void OnGameObjectSwitch(GameObject _gameobject)
-    {
-        if (gameObject == null)
-        {
-            text.enabled = false;
-            return;
-        }
+        [SerializeField] private TMP_Text text = null;
+        [SerializeField] private DisplayCaseCarousel selector = null;
 
-        text.enabled = true;
-        
-        if (_gameobject.GetComponent<Renderer>())
+        public void Start()
         {
-            Renderer renderer = _gameobject.GetComponent<Renderer>();
-            text.text = renderer.sharedMaterial.shader.ToString();
-            return;
+            selector.onDisplayChange += OnSelectionChange;
+
+            text.text = selector.GetSelectedDisplayModel().GetModelRenderer().sharedMaterial.shader.ToString();
         }
         
-        text.text = _gameobject.name;
+        private void OnSelectionChange(DisplayCase _previousCase, DisplayCase _currentCase)
+        {
+            if (_currentCase == null)
+            {
+                text.enabled = false;
+                return;
+            }
+
+            text.enabled = true;
+            text.text = _currentCase.GetModelRenderer().sharedMaterial.shader.ToString();
+        }
     }
 }

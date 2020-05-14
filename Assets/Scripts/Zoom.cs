@@ -4,7 +4,7 @@ namespace AdrianMiasik
 {
     public class Zoom : MonoBehaviour
     {
-        [SerializeField] private OrbitCamera orbitCamera;
+        [SerializeField] private OrbitCamera orbitCamera = null;
         [SerializeField] private float sensitivity = 1f;
         [SerializeField] private float currentZoom = 20f;
 
@@ -24,7 +24,7 @@ namespace AdrianMiasik
             orbitCamera.SetZoomDistance(currentZoom);
         }
 
-        private float FetchInput()
+        private static float FetchInput()
         {
             return Input.GetAxis("Mouse ScrollWheel") * -1;
         }
