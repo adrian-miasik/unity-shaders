@@ -177,13 +177,13 @@ MonoBehaviour:
   displayPrefab: {fileID: 254904282345760615, guid: dbc8f14d0eae14449af9e6a606a96978,
     type: 3}
   materials: {fileID: 11400000, guid: 0f5c62d0b53c29a4d88e055eb5d1fe99, type: 2}
-  modelPrefab: {fileID: 5065609162872585356, guid: 4313dc3956a9d914bab68dceb7e1bb78,
+  modelPrefab: {fileID: 2146552938140608873, guid: f48bc7d819fbff340a18f381bb14761b,
     type: 3}
   displayCaseSelector: {fileID: 96782216}
   targetPosition: {x: 0, y: 0, z: 0}
   itemOffset: {x: 0, y: 1, z: 0}
   displayOffset: {x: 3, y: 0, z: 0}
-  animationDuration: 0.5
+  animationDuration: 1
 --- !u!1 &133244375
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carouselManager: {fileID: 2019735288}
   allShaderModels: []
-  initializationStagger: 0.4
+  initializationStagger: 0.3
 --- !u!1 &646206718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,7 +1310,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 3}
   itemOffset: {x: 0, y: 1, z: 0}
   displayOffset: {x: 3, y: 0, z: 0}
-  animationDuration: 0.5
+  animationDuration: 1
 --- !u!1 &2019735286
 GameObject:
   m_ObjectHideFlags: 0
