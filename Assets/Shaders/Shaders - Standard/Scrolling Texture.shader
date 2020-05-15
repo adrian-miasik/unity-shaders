@@ -33,11 +33,19 @@
                 float2 uv : TEXCOORD0;
             };
 
-            sampler2D _Texture;
-            float4 _Texture_ST; // Needed for tiling and offset
+
+            Texture2D _Texture;
+
+            // The sampler state forces our texture to use filtering mode 'linear' and wrap mode 'repeat' regardless of texture settings
+            SamplerState sampler_linear_repeat;
+
+            // Needed for tiling and offset
+            float4 _Texture_ST;
+
             float _Scale;
             float _VerticalSpeed;
             float _HorizontalSpeed;
+
 
             v2f vert (appdata v)
             {
@@ -56,7 +64,7 @@
                 y += _Time * _VerticalSpeed * 20;
                 x += _Time * _HorizontalSpeed * 20;
 
-                return tex2D(_Texture, float2(x,y));
+                return _Texture.Sample(sampler_linear_repeat, float2(x,y)); // Sampler State Source: https://docs.unity3d.com/Manual/SL-SamplerStates.html
             }
             ENDCG
         }
