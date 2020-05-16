@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gooey Vertex Displacement
+  m_Name: SineGooey Vertex Displacement
   m_Shader: {fileID: 4800000, guid: 068836f43aa8ec6458882178081b91a2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
