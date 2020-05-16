@@ -1,2 +1,2 @@
 # unity-shader-examples
-A bunch of shader examples in Unity
+A bunch of shader examples done inside Unity (ShaderGraph & Built-in)
