@@ -28,4 +28,4 @@ Material:
     - _Scale: 1
     - _VerticalSpeed: 0.2
     m_Colors:
-    - _Background: {r: 0.9528302, g: 0.8954434, b: 0.31910825, a: 1}
+    - _Background: {r: 1, g: 0.78431374, b: 0.13725491, a: 1}
