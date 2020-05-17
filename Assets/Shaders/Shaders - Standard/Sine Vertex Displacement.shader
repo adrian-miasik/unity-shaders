@@ -38,28 +38,29 @@
             float3 _Axis;
             float4 _Color;
 
-                float4 Unity_Combine_float(float R, float G, float B, float A)
+            // Source: https://docs.unity3d.com/Packages/com.unity.shadergraph@7.1/manual/Combine-Node.html
+            float4 Unity_Combine_float(float R, float G, float B, float A)
             {
                 return float4(R, G, B, A);
             }
 
             v2f vert (appdata v)
             {
-                v2f o;
-                float time = _Speed * _Time * 200;
+                float time = _Speed * _Time * 200; // 200 = Magic number that aligns our speed with the shadergraph variant of this shader. :(
+
+                // Wave
                 float4 sineWave = sin(time + v.vertex * _Frequency) * _Amplitude;
 
-                float3 container1 = _Axis.r * sineWave;
-                float3 container2 = _Axis.g * sineWave;
-                float3 container3 = _Axis.b * sineWave;
+                // Wave enabled per axis
+                float3 waveX = sineWave * _Axis.r;
+                float3 waveY = sineWave * _Axis.g;
+                float3 waveZ = sineWave * _Axis.b;
 
-                float3 container4 = container1 + v.vertex.r;
-                float3 container5 = container2 + v.vertex.g;
-                float3 container6 = container3 + v.vertex.b;
+                // Composition
+                float4 modifiedVerts = Unity_Combine_float(v.vertex.x + waveX, v.vertex.y +  waveY, v.vertex.z +  waveZ, 1);
 
-                float4 results = Unity_Combine_float(container4, container5, container6, 1);
-
-                o.vertex = UnityObjectToClipPos(results);
+                v2f o;
+                o.vertex = UnityObjectToClipPos(modifiedVerts);
                 o.uv = v.uv;
                 return o;
             }
