@@ -127,8 +127,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 96782215}
-  - component: {fileID: 96782217}
   - component: {fileID: 96782216}
+  - component: {fileID: 96782217}
   m_Layer: 0
   m_Name: Shaders - Standard
   m_TagString: Untagged
