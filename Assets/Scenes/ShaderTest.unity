@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayPrefab: {fileID: 254904282345760615, guid: dbc8f14d0eae14449af9e6a606a96978,
     type: 3}
-  materials: {fileID: 11400000, guid: 490cd51bff89d754ca5e9475ac05455a, type: 2}
+  materials: {fileID: 11400000, guid: b6a90b1fee5080b459d28b797f4ecc27, type: 2}
   modelPrefab: {fileID: 5065609162872585356, guid: 4313dc3956a9d914bab68dceb7e1bb78,
     type: 3}
   displayCaseSelector: {fileID: 2018496269}
