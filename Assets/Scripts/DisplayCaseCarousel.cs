@@ -125,8 +125,7 @@ namespace AdrianMiasik
             transform.position = Vector3.Lerp(startPosition, targetPosition + endPosition, _t);
         }
 
-        // TODO: Utilize
-        public void SetTargetPosition(Vector3 _targetPosition)
+        public void MoveTo(Vector3 _targetPosition)
         {
             startPosition = transform.position;
             targetPosition = _targetPosition;
@@ -157,17 +156,7 @@ namespace AdrianMiasik
                 displays.Add(_displayCase);
             }
         }
-        
-        public void NextDisplay()
-        {
-            displayCaseSelector.NextItem();
-        }
 
-        public void PreviousDisplay()
-        {
-            displayCaseSelector.PreviousItem();
-        }
-        
         public DisplayCase GetSelectedDisplayModel()
         {
             return displayCaseSelector.GetCurrentItem();
