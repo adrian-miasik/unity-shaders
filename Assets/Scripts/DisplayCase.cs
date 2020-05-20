@@ -11,8 +11,8 @@ namespace AdrianMiasik
         [SerializeField] private PositionConstraint modelConstraintContainer = null;
 
         [Header("Optional")]
-        [SerializeField] private GameObject model;
-        
+        private GameObject model;
+
         private new Renderer renderer;
         private const PrimitiveType primitiveFallback = PrimitiveType.Sphere; // TODO: Store in user settings
         private bool hasInitialized;
@@ -22,10 +22,7 @@ namespace AdrianMiasik
         
         public void Initialize(GameObject _modelToSpawn, Vector3 _modelLocalPos)
         {
-            if (model == null)
-            {
-                SpawnModel(_modelToSpawn, _modelLocalPos);
-            }
+            SpawnModel(_modelToSpawn, _modelLocalPos);
 
             if (model != null)
             {
@@ -60,7 +57,7 @@ namespace AdrianMiasik
                 // Use desired model
                 model = Instantiate(_modelToSpawn, modelConstraintContainer.transform);
             }
-            
+
             model.transform.localPosition = _modelLocalPos;
         }
         
@@ -95,7 +92,7 @@ namespace AdrianMiasik
         {
             if (!hasInitialized)
             {
-                Debug.LogWarning("Please invoke Initialize() before FetchModelRenderer()");
+                Debug.LogWarning("Please invoke Initialize() before GetModelRenderer()");
                 return null;
             }
             

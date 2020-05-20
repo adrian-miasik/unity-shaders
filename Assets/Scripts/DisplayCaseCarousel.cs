@@ -1,29 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AdrianMiasik
 {
+    [ExecuteInEditMode]
     public class DisplayCaseCarousel : MonoBehaviour
     {
         // References
-        [SerializeField] private DisplayCase displayPrefab = null;
-        [SerializeField] private MaterialList materials = null;
-        [SerializeField] private GameObject modelPrefab = null;
         [SerializeField] private DisplayCaseSelector displayCaseSelector = null;
-        
-        // TODO: Create inspector which only shows this after init
-        [SerializeField] private Vector3 targetPosition = Vector3.zero; // Position where we want the selected object to go to
-        [SerializeField] private Vector3 itemOffset = Vector3.up; // How much to offset the model inside the display case?
-        [SerializeField] private Vector3 displayOffset = Vector3.right; // How much to offset the entire display case?
-        [SerializeField] private float animationDuration = 0.5f;
-        
-        // TODO: Create inspector which makes this a read-only
-        private bool isInitialized;
-        private readonly List<DisplayCase> displays = new List<DisplayCase>();
-        private bool isAnimating;
+        [SerializeField] private DisplayCase displayCasePrefab = null;
+        [SerializeField] private GameObject shaderModelPrefab = null;
+        [SerializeField] private MaterialList materials = null;
+
+        [Tooltip("How much to offset the model inside the display case?")]
+        [SerializeField] private Vector3 itemOffset = Vector3.up;
+
+        [SerializeField] public Vector3 staggerDisplayOffset = Vector3.right;
+        [SerializeField] private Vector3 individualDisplayOffset = Vector3.up;
+
+        [SerializeField, HideInInspector] private bool isInitialized;
+        [SerializeField, HideInInspector] private List<DisplayCase> displays = new List<DisplayCase>();
+
+        // Animations
+        [SerializeField] private float movementDuration = 1;
+        [SerializeField] private AnimationCurve movementCurve = AnimationCurve.Linear(0,0,1,1);
+
+        private bool isRunning;
+        private bool isWaiting;
         private Vector3 startPosition;
         private Vector3 endPosition;
-        private float accumulatedTime;
+        private float totalAccumulatedTime;
+        private float accumulatedWaitTime;
+        private float delayTime = 1;
 
         /// <summary>
         /// Invoked when the DisplayModel selection changes
@@ -31,28 +40,29 @@ namespace AdrianMiasik
         public delegate void OnDisplayChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay);
         public OnDisplayChange onDisplayChange;
 
-        public delegate void OnClick(DisplayCaseCarousel _clickedCarousel);
-        public OnClick onClick;
+        public delegate void OnSelection(DisplayCaseCarousel _selectedCarousel);
+        public OnSelection onSelection;
 
         [ContextMenu("Initialize")]
         public void Initialize()
         {
             if (isInitialized)
             {
-                Debug.LogWarning("This carousel has already been initialized");
-                return;
+                Debug.Log("Building Carousel.");
+                CleanUp();
             }
-            
-            GenerateDisplays(displayPrefab, modelPrefab, materials.materials.Count);
+
+            GenerateDisplays(displayCasePrefab, shaderModelPrefab, materials.materials.Count);
 
             // Swap materials on each model
             for (int _i = 0; _i < displays.Count; _i++)
             {
                 DisplayCase _display = displays[_i];
                 _display.ChangeModelMaterial(materials.materials[_i]);
+                _display.gameObject.name = "Display Case: " + _display.GetModelRenderer().sharedMaterial.shader;
             }
 
-            targetPosition = transform.position;
+            startPosition = transform.position;
             
             displayCaseSelector.Initialize(displays);
             displayCaseSelector.onSelectionChange += OnSelectionChange;
@@ -68,17 +78,27 @@ namespace AdrianMiasik
         {
             foreach (DisplayCase _displayCase in displays)
             {
-                DestroyImmediate(_displayCase.gameObject);
+                // It's possible our display case was deleted in the editor
+                if (_displayCase != null)
+                {
+                    DestroyImmediate(_displayCase.gameObject);
+                }
             }
             
             Clear();
         }
 
+        [ContextMenu("Rebuild")]
+        public void Rebuild()
+        {
+            CleanUp();
+            Initialize();
+        }
+
         private void Clear()
         {
             displays.Clear();
-            targetPosition = Vector3.zero;
-            
+
             displayCaseSelector.onSelectionChange -= OnSelectionChange;
             displayCaseSelector.Clear();
             
@@ -93,11 +113,13 @@ namespace AdrianMiasik
                 return;
             }
 
-            startPosition = transform.position;
-            endPosition = displayOffset * (displayCaseSelector.GetCurrentIndex() * -1);
-            accumulatedTime = 0;
+            onSelection?.Invoke(this);
 
-            isAnimating = true;
+            startPosition = transform.position;
+            endPosition = new Vector3(staggerDisplayOffset.x * (displayCaseSelector.GetCurrentIndex() * -1), startPosition.y, startPosition.z);
+            totalAccumulatedTime = 0;
+
+            isRunning = true;
             onDisplayChange?.Invoke(_previousDisplay, _currentDisplay);
         }
 
@@ -108,48 +130,68 @@ namespace AdrianMiasik
                 return;
             }
 
-            if (!isAnimating)
+            if (!isRunning)
             {
                 return;
             }
 
-            accumulatedTime += Time.deltaTime;
-            if (accumulatedTime > animationDuration)
+            totalAccumulatedTime += Time.deltaTime;
+
+            // Early exit condition
+            isWaiting = totalAccumulatedTime <= delayTime;
+            if (isWaiting)
             {
-                accumulatedTime = animationDuration;
-                isAnimating = false;
+                return;
             }
 
-            float _t = accumulatedTime / animationDuration;
-            _t = _t * _t * (3 - 2 * _t); // Smoothstep formula
-            transform.position = Vector3.Lerp(startPosition, targetPosition + endPosition, _t);
+            accumulatedWaitTime += Time.deltaTime;
+            float _t = accumulatedWaitTime / movementDuration;
+
+            if (_t > 1)
+            {
+                transform.position = endPosition;
+                isRunning = false;
+                return;
+            }
+
+            _t = movementCurve.Evaluate(_t);
+            transform.position = Vector3.Lerp(startPosition, endPosition, _t);
         }
 
-        public void MoveTo(Vector3 _targetPosition)
+        public void MoveTo(Vector3 _targetPosition, float _delay)
         {
             startPosition = transform.position;
-            targetPosition = _targetPosition;
-            isAnimating = true;
-            accumulatedTime = 0;
+            endPosition = _targetPosition;
+
+            delayTime = _delay;
+            totalAccumulatedTime = 0;
+            accumulatedWaitTime = 0;
+
+            if (_delay > 0)
+            {
+                isWaiting = true;
+            }
+
+            isRunning = true;
         }
 
         /// <summary>
         /// Creates and caches a list of DisplayCases
         /// </summary>
-        /// <param name="_displayPrefab">What display case do you want to generate?</param>
+        /// <param name="_display">What display case do you want to generate?</param>
         /// <param name="_modelToSpawnInside">What GameObject do you want to generate inside the display case?</param>
         /// <param name="_quantity">How many displays would you like to generate?</param>
         /// <returns></returns>
-        private void GenerateDisplays(DisplayCase _displayPrefab, GameObject _modelToSpawnInside, int _quantity)
+        private void GenerateDisplays(DisplayCase _display, GameObject _modelToSpawnInside, int _quantity)
         {
             displays.Clear();
 
             for (int _i = 0; _i < _quantity; _i++)
             {
                 // Create a display
-                DisplayCase _displayCase = Instantiate(_displayPrefab, transform);
+                DisplayCase _displayCase = Instantiate(_display, transform);
                 _displayCase.Initialize(_modelToSpawnInside, itemOffset);
-                _displayCase.SetDisplayPosition(_displayCase.GetDisplayWorldPosition() + displayOffset * _i);
+                _displayCase.SetDisplayPosition(_displayCase.GetDisplayWorldPosition() + staggerDisplayOffset * _i + individualDisplayOffset);
                 _displayCase.onClick += OnDisplayCaseClick;
 
                 // Cache display
@@ -162,10 +204,13 @@ namespace AdrianMiasik
             return displayCaseSelector.GetCurrentItem();
         }
 
+        /// <summary>
+        /// Invoked when the user clicks on the display case
+        /// </summary>
+        /// <param name="_displayCase"></param>
         private void OnDisplayCaseClick(DisplayCase _displayCase)
         {
             displayCaseSelector.Select(_displayCase);
-            onClick?.Invoke(this);
         }
 
         /// <summary>
@@ -175,6 +220,16 @@ namespace AdrianMiasik
         public IEnumerable<DisplayCase> GetDisplayCases()
         {
             return displays;
+        }
+
+        public int GetSelectedIndex()
+        {
+            return displayCaseSelector.GetCurrentIndex();
+        }
+
+        public void Select(int _index)
+        {
+            displayCaseSelector.Select(_index);
         }
     }
 }
