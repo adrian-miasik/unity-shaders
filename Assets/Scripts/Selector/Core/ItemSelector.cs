@@ -119,6 +119,7 @@ namespace AdrianMiasik
             }
 
             ChangeSelection(_itemInList);
+            onSelectionChange?.Invoke(lastSelectedItem, currentItem);
             return true;
         }
 
@@ -127,7 +128,7 @@ namespace AdrianMiasik
         /// Otherwise we will only return false. (No current item change)
         /// </summary>
         /// <param name="_index"></param>
-        private bool Select(int _index)
+        public bool Select(int _index)
         {
             if (!IsIndexValid(_index))
             {
@@ -148,7 +149,7 @@ namespace AdrianMiasik
         {
             return _index >= 0 && _index < items.Count;
         }
-        
+
         private void ChangeSelection(T _itemInList)
         {
             // Deselect
@@ -158,10 +159,9 @@ namespace AdrianMiasik
             // Swap
             currentItem = _itemInList;
             currentIndex = items.IndexOf(_itemInList);
-            
+
             // Select
             onSelected?.Invoke(currentItem);
-            onSelectionChange?.Invoke(lastSelectedItem, currentItem);
         }
         
         /// <summary>
