@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.72784334, g: 0.72880876, b: 0.73177576, a: 1}
+  m_IndirectSpecularColor: {r: 0.7854866, g: 0.7868601, b: 0.78869706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4110,10 +4110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1968312477}
   cameraTarget: {fileID: 133244376}
-  positionOffset: {x: 0, y: 0, z: 0}
+  positionOffset: {x: 0, y: -0.25, z: 0}
   startingRotation: {x: 18, y: 0}
   axisSensitivity: {x: 3, y: 3}
-  distanceFromTarget: 10
+  distanceFromTarget: 2.5
   minDistanceClamp: 1
   autoSpin: 0
   spinDirection: {x: 0, y: 1}
@@ -4132,7 +4132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitCamera: {fileID: 646206720}
   sensitivity: 3
-  currentZoom: 10
+  currentZoom: 2.5
 --- !u!1 &678570867
 GameObject:
   m_ObjectHideFlags: 0
@@ -11503,7 +11503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968312475}
   m_LocalRotation: {x: 0.15643449, y: -0, z: -0, w: 0.98768836}
-  m_LocalPosition: {x: 0, y: 3.0901704, z: -9.510565}
+  m_LocalPosition: {x: 0, y: 0.5225426, z: -2.3776412}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 646206719}
