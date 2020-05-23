@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Shader - Single
   m_EditorClassIdentifier: 
   materials:
-  - {fileID: 2100000, guid: 179dbc0129a896c47a49b515a113866c, type: 2}
+  - {fileID: 2100000, guid: c64c0ce1c7250b246ab9433c6e795f60, type: 2}
