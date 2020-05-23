@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Demo.unity
     guid: 5f24ff45de2ac9644964b0864f96f119
+  - enabled: 1
+    path: Assets/Scenes/Extra/Single Shader.unity
+    guid: a8bc346f66723a441881484526a84ce9
   m_configObjects: {}
