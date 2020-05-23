@@ -2,7 +2,6 @@
 
 namespace AdrianMiasik
 {
-    [ExecuteInEditMode]
     public class OrbitCamera : MonoBehaviour
     {
         [SerializeField] private new Camera camera; // new keyword here since Component.camera already exists
