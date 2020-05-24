@@ -4112,7 +4112,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: -0.25, z: 0}
   startingRotation: {x: 18, y: 0}
   axisSensitivity: {x: 3, y: 3}
-  distanceFromTarget: 2.5
+  distanceFromTarget: 5
   minDistanceClamp: 1
   autoSpin: 0
   spinDirection: {x: 0, y: 1}
@@ -4131,7 +4131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitCamera: {fileID: 646206720}
   sensitivity: 3
-  currentZoom: 2.5
+  currentZoom: 5
 --- !u!1 &648634156
 GameObject:
   m_ObjectHideFlags: 0
@@ -11687,8 +11687,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968312475}
-  m_LocalRotation: {x: 0.1564345, y: 0, z: 0, w: 0.98768836}
-  m_LocalPosition: {x: 0, y: 0.5270511, z: -2.8527834}
+  m_LocalRotation: {x: 0.15643449, y: -0, z: -0, w: 0.98768836}
+  m_LocalPosition: {x: 0, y: 1.2950852, z: -4.7552824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 646206719}
