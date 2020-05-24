@@ -107,12 +107,6 @@ namespace AdrianMiasik
         
         private void OnSelectionChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay)
         {
-            // Ignore clicks on the same display case
-            if (_currentDisplay == _previousDisplay)
-            {
-                return;
-            }
-
             onSelection?.Invoke(this);
 
             startPosition = transform.position;
