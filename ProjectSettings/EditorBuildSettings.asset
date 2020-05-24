@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Demo.unity
+    path: Assets/Scenes/Demo - All Shaders.unity
     guid: 5f24ff45de2ac9644964b0864f96f119
   - enabled: 1
     path: Assets/Scenes/Extra/Single Shader.unity
