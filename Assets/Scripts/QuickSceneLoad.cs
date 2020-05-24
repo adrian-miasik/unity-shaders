@@ -5,7 +5,7 @@ namespace AdrianMiasik
 {
     public class QuickSceneLoad : MonoBehaviour
     {
-        [SerializeField] private int sceneIndex;
+        [SerializeField] private int sceneIndex = 0;
 
         void Update()
         {
