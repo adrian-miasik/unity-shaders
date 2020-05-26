@@ -8,18 +8,18 @@
         _Gloss("Gloss", float) = 15
         _GlossStepFalloff("Gloss Step Falloff", Range(0, 1)) = 0.1
         _Color("Outline Color", Color) = (0.5,0.5,0.5, 1)
-        _Width("Outline Width", float) = 1
+        _Width("Outline Width", Range(0, 1)) = 0.1
     }
     SubShader
     {
         Tags {
-            "RenderPipeline"="LightweightPipeline" 
+            "RenderPipeline"="UniversalPipeline"
             "RenderType"="Transparent" 
         }
         
         Pass
         {
-            Tags { "LightMode"="LightweightForward" }
+            Tags { "LightMode"="UniversalForward" }
             ZWrite Off
             Blend SrcAlpha OneMinusSrcAlpha
                 
@@ -29,7 +29,7 @@
             #pragma prefer_hlslcc gles
             #pragma exclude_renderers d3d11_9x
 
-            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             
             struct appdata
             {
@@ -50,14 +50,14 @@
             {
                 v2f o;
 
-                VertexPositionInputs vertex = GetVertexPositionInputs(v.vertex);
-                o.vertex = vertex.positionCS;
+                VertexPositionInputs vertex = GetVertexPositionInputs(v.vertex.xyz);
+                o.vertex = vertex.positionCS; // clip space
                 
                 VertexNormalInputs normal = GetVertexNormalInputs(v.normal);
                 o.normal = normal.normalWS;
                 
-                float distanceToCamera = distance(mul((float3x3)unity_ObjectToWorld, o.vertex), _WorldSpaceCameraPos);
-                v.vertex.xyz += normalize(o.normal) * _Width * distanceToCamera;
+                float distanceToCamera = distance(mul((float3x3)unity_ObjectToWorld, o.vertex.xyz   ), _WorldSpaceCameraPos);
+                v.vertex.xyz += normalize(o.normal) * _Width * 0.020 * distanceToCamera; // 0.020 = Magic 'feels-good' human number
                 o.vertex = TransformObjectToHClip(v.vertex.xyz);
                 return o;
                 
