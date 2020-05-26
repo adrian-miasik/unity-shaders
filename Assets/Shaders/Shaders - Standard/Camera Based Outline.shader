@@ -56,7 +56,7 @@
                 VertexNormalInputs normal = GetVertexNormalInputs(v.normal);
                 o.normal = normal.normalWS;
                 
-                float distanceToCamera = distance(mul((float3x3)unity_ObjectToWorld, o.vertex.xyz   ), _WorldSpaceCameraPos);
+                float distanceToCamera = distance(mul((float3x3)unity_ObjectToWorld, o.vertex.xyz), _WorldSpaceCameraPos);
                 v.vertex.xyz += normalize(o.normal) * _Width * 0.020 * distanceToCamera; // 0.020 = Magic 'feels-good' human number
                 o.vertex = TransformObjectToHClip(v.vertex.xyz);
                 return o;
