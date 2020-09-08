@@ -21,8 +21,6 @@ namespace AdrianMiasik
 
         private void SetupCarousels()
         {
-
-
             foreach (DisplayCaseCarousel _carousel in carousels)
             {
                 _carousel.Initialize();
