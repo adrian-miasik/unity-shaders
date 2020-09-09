@@ -59,7 +59,7 @@ namespace AdrianMiasik
             {
                 DisplayCase _display = displays[_i];
                 _display.ChangeModelMaterial(materials.materials[_i]);
-                _display.gameObject.name = "Display Case: " + _display.GetModelRenderer().sharedMaterial.shader;
+                _display.gameObject.name = "Display Case: " + _display.GetShader();
             }
 
             startPosition = transform.position;
@@ -191,6 +191,11 @@ namespace AdrianMiasik
                 // Cache display
                 displays.Add(_displayCase);
             }
+        }
+
+        public Shader GetShader()
+        {
+            return GetSelectedDisplayModel().GetModelRenderer().sharedMaterial.shader;
         }
 
         public DisplayCase GetSelectedDisplayModel()

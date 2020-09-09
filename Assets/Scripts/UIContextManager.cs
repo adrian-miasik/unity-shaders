@@ -7,65 +7,36 @@ namespace AdrianMiasik
 {
     public class UIContextManager : MonoBehaviour
     {
-        [SerializeField] private RectTransform container = null;
-        [SerializeField] private ContentSizeFitter contentFitter = null;
-        [SerializeField] private TMP_Text text = null;
         [SerializeField] private List<DisplayCaseCarousel> selector = null;
-        [SerializeField] private int preferredFontSize = 38;
+        [SerializeField] private TitleLabel sourceTitleLabelPrefab = null;
         
-        private void Refresh()
-        {
-            if (text.text == string.Empty)
-            {
-                contentFitter.horizontalFit = ContentSizeFitter.FitMode.MinSize;
-            }
-            
-            // Change fit and update ui elements (font before layout group)
-            text.enableAutoSizing = false;
-            text.fontSize = preferredFontSize;
-            contentFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
-            LayoutRebuilder.ForceRebuildLayoutImmediate(container);
+        // Cache
+        private TitleLabel currentLabel = null;
 
-            Debug.LogWarning(container.sizeDelta.x);
-            
-            // if content is overflowing...
-            if (container.sizeDelta.x > 0)
-            {
-                contentFitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
-                container.Resize();
-                text.enableAutoSizing = true;
-            }
-            // else content is within bounds...
-            else
-            {
-                contentFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
-                text.enableAutoSizing = false;
-                text.fontSize = preferredFontSize;
-            }
-        }
-        
         public void Start()
         {
             foreach (DisplayCaseCarousel _carousel in selector)
             {
+                // Subscribe to selection changes
                 _carousel.onDisplayChange += OnSelectionChange;
-                text.text = _carousel.GetSelectedDisplayModel().GetModelRenderer().sharedMaterial.shader.ToString();
             }
             
-            Refresh();
+            // Spawn a label based on the last added carousel
+            currentLabel = SpawnLabel(selector[selector.Count - 1].GetShader().ToString());
         }
         
         private void OnSelectionChange(DisplayCase _previousCase, DisplayCase _currentCase)
         {
-            if (_currentCase == null)
-            {
-                text.enabled = false;
-                return;
-            }
+            currentLabel.Hide();
+            currentLabel = SpawnLabel(_currentCase.GetShader().ToString());
+        }
 
-            text.enabled = true;
-            text.text = _currentCase.GetModelRenderer().sharedMaterial.shader.ToString();
-            Refresh();
+        // TODO: Create a spawner for ui elements
+        private TitleLabel SpawnLabel(string _message)
+        {
+            TitleLabel _label = Instantiate(sourceTitleLabelPrefab, transform);
+            _label.Initialize(_message);
+            return _label;
         }
     }
 }

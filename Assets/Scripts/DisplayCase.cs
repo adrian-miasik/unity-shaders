@@ -121,6 +121,11 @@ namespace AdrianMiasik
             Debug.LogAssertion("Failed to fetch you a renderer.");
             return null;
         }
+
+        public Shader GetShader()
+        {
+            return GetModelRenderer().sharedMaterial.shader;
+        }
         
         public void OnPointerClick(PointerEventData _eventData)
         {
