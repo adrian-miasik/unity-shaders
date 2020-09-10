@@ -135,6 +135,8 @@ MonoBehaviour:
   contentFitter: {fileID: 6562965161025840113}
   text: {fileID: 6562965161341819543}
   preferredFontSize: 35
+  anim: {fileID: 1966712212370594659}
+  exitAnim: {fileID: 7400000, guid: 443428949ce87ec47bde7ca32eb0ba89, type: 2}
 --- !u!225 &8688613306624109097
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -159,6 +161,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 7addccae93336554dbf409e1d8d3b19b, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 7addccae93336554dbf409e1d8d3b19b, type: 2}
+  - {fileID: 7400000, guid: 443428949ce87ec47bde7ca32eb0ba89, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

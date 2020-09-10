@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,10 +14,27 @@ namespace AdrianMiasik
         [SerializeField] private TMP_Text text = null;
         [SerializeField] private int preferredFontSize = 38;
 
+        [SerializeField] private Animation anim = null;
+        [SerializeField] private AnimationClip exitAnim = null;
+        
+        private bool isClosing = false;
+        
         public void Initialize(string _message)
         {
             text.text = _message;
             Refresh();
+        }
+
+        private void Update()
+        {
+            if (isClosing)
+            {
+                if (!anim.isPlaying)
+                {
+                    isClosing = false;
+                    Destroy(gameObject);
+                }
+            }
         }
 
         private void Refresh()
@@ -51,8 +69,9 @@ namespace AdrianMiasik
         
         public void Hide()
         {
-            Debug.LogWarning("TODO: Animate context label out");
-            Destroy(gameObject);
+            anim.clip = exitAnim;
+            anim.Play();
+            isClosing = true;
         }
     }
 }
