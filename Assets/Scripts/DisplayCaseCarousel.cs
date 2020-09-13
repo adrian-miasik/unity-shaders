@@ -152,6 +152,7 @@ namespace AdrianMiasik
             transform.position = Vector3.Lerp(startPosition, endPosition, _t);
         }
 
+        // TODO: Ability to queue movements
         public void MoveTo(Vector3 _targetPosition, float _delay)
         {
             startPosition = transform.position;
@@ -167,6 +168,11 @@ namespace AdrianMiasik
             }
 
             isMoving = true;
+        }
+
+        public float GetMovementDuration()
+        {
+            return movementDuration;
         }
 
         // TODO: Spawner

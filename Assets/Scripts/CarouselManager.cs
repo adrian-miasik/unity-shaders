@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace AdrianMiasik
 {
+    // TODO: Clean up
     public class CarouselManager : MonoBehaviour
     {
         [SerializeField] private DisplayCaseCarouselSelector _carouselSelector = null;
@@ -14,12 +16,18 @@ namespace AdrianMiasik
 
         [SerializeField] private float animationStaggerDelay = 0.25f;
         private float waitTime;
-        
+
+        private bool isInitialized = false;
+        [SerializeField] private bool isMovingOnX = false;
+        private float longestXDelayTime = 0f;
+        private float accumulatedTime = 0f;
+
         // TODO: Unsub properly
         
         private void Start()
         {
             SetupCarousels();
+            isInitialized = true;
         }
 
         private void SetupCarousels()
@@ -96,18 +104,52 @@ namespace AdrianMiasik
 
         public void OnSelected(DisplayCaseCarousel _selectedCarousel)
         {
+            // Reset X movement (for interruptions)
+            isMovingOnX = false;
+            accumulatedTime = 0f;
+            
             _carouselSelector.Select(_selectedCarousel);
 
+            longestXDelayTime = 0f;
+
+            // X-axis movement
             foreach (DisplayCaseCarousel _carousel in _carouselSelector.GetItems())
             {
-                // X-axis
                 Vector3 desiredPosition = _carousel.transform.position;
                 desiredPosition.x = _carousel.staggerDisplayOffset.x * (_selectedCarousel.GetSelectedIndex() * -1);
+
+                float delayTime = animationStaggerDelay * GetIndexDistance(_carouselSelector.GetItems(),
+                    _carousel, _selectedCarousel);
+
+                if (longestXDelayTime <= delayTime + _carousel.GetMovementDuration())
+                {
+                    longestXDelayTime = delayTime + _carousel.GetMovementDuration();
+                }
                 
-                _carousel.MoveTo(desiredPosition, 
-                    animationStaggerDelay * GetIndexDistance(_carouselSelector.GetItems(),
-                        _carousel, _selectedCarousel));
+                _carousel.MoveTo(desiredPosition, delayTime);
             }
+
+            isMovingOnX = true;
+        }
+
+        private void Update()
+        {
+            if (!isInitialized)
+            {
+                return;
+            }
+
+            if (isMovingOnX)
+            {
+                accumulatedTime += Time.deltaTime;
+
+                if (accumulatedTime > longestXDelayTime)
+                {
+                    isMovingOnX = false;
+                    accumulatedTime = 0f;
+                    Debug.Log("TODO: Z-Axis Movement");
+                }
+            }                
         }
     }
 }
