@@ -26,25 +26,22 @@ namespace AdrianMiasik
         [SerializeField] private float movementDuration = 1;
         [SerializeField] private AnimationCurve movementCurve = AnimationCurve.Linear(0,0,1,1);
 
-        private bool isRunning;
-        private bool isWaiting;
+        // Optional
+        private CarouselManager carouselManager;
+        
+        private bool isMoving;
+        private bool isDelayed;
         private Vector3 startPosition;
         private Vector3 endPosition;
         private float totalAccumulatedTime;
         private float accumulatedWaitTime;
         private float delayTime = 1;
-
-        /// <summary>
-        /// Invoked when the DisplayModel selection changes
-        /// </summary>
+        
         public delegate void OnDisplayChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay);
         public OnDisplayChange onDisplayChange;
-
-        public delegate void OnSelection(DisplayCaseCarousel _selectedCarousel);
-        public OnSelection onSelection;
-
+        
         [ContextMenu("Initialize")]
-        public void Initialize()
+        public void Initialize(CarouselManager _carouselManager)
         {
             if (isInitialized)
             {
@@ -52,6 +49,11 @@ namespace AdrianMiasik
                 CleanUp();
             }
 
+            if(_carouselManager != null)
+            {
+                carouselManager = _carouselManager;
+            }
+            
             GenerateDisplays(displayCasePrefab, shaderModelPrefab, materials.materials.Count);
 
             // Swap materials on each model
@@ -59,15 +61,25 @@ namespace AdrianMiasik
             {
                 DisplayCase _display = displays[_i];
                 _display.ChangeModelMaterial(materials.materials[_i]);
-                _display.gameObject.name = "Display Case: " + _display.GetModelRenderer().sharedMaterial.shader;
+                _display.gameObject.name = "Display Case: " + _display.GetShader();
             }
 
             startPosition = transform.position;
             
             displayCaseSelector.Initialize(displays);
-            displayCaseSelector.onSelectionChange += OnSelectionChange;
+            displayCaseSelector.onSelected += OnSelected;
 
             isInitialized = true;
+        }
+        
+        private void OnSelected(DisplayCase _selectedItem)
+        {
+            if (carouselManager != null)
+            {
+                carouselManager.OnSelected(this);
+            }
+            
+            onDisplayChange?.Invoke(displayCaseSelector.GetLastSelectedItem(), _selectedItem);
         }
 
         /// <summary>
@@ -92,29 +104,17 @@ namespace AdrianMiasik
         public void Rebuild()
         {
             CleanUp();
-            Initialize();
+            Initialize(null);
         }
 
         private void Clear()
         {
             displays.Clear();
-
-            displayCaseSelector.onSelectionChange -= OnSelectionChange;
+            
+            displayCaseSelector.onSelected -= OnSelected;
             displayCaseSelector.Clear();
             
             isInitialized = false;
-        }
-        
-        private void OnSelectionChange(DisplayCase _previousDisplay, DisplayCase _currentDisplay)
-        {
-            onSelection?.Invoke(this);
-
-            startPosition = transform.position;
-            endPosition = new Vector3(staggerDisplayOffset.x * (displayCaseSelector.GetCurrentIndex() * -1), startPosition.y, startPosition.z);
-            totalAccumulatedTime = 0;
-
-            isRunning = true;
-            onDisplayChange?.Invoke(_previousDisplay, _currentDisplay);
         }
 
         private void Update()
@@ -124,7 +124,7 @@ namespace AdrianMiasik
                 return;
             }
 
-            if (!isRunning)
+            if (!isMoving)
             {
                 return;
             }
@@ -132,8 +132,8 @@ namespace AdrianMiasik
             totalAccumulatedTime += Time.deltaTime;
 
             // Early exit condition
-            isWaiting = totalAccumulatedTime <= delayTime;
-            if (isWaiting)
+            isDelayed = totalAccumulatedTime <= delayTime;
+            if (isDelayed)
             {
                 return;
             }
@@ -144,7 +144,7 @@ namespace AdrianMiasik
             if (_t > 1)
             {
                 transform.position = endPosition;
-                isRunning = false;
+                isMoving = false;
                 return;
             }
 
@@ -152,6 +152,7 @@ namespace AdrianMiasik
             transform.position = Vector3.Lerp(startPosition, endPosition, _t);
         }
 
+        // TODO: Ability to queue movements
         public void MoveTo(Vector3 _targetPosition, float _delay)
         {
             startPosition = transform.position;
@@ -163,12 +164,18 @@ namespace AdrianMiasik
 
             if (_delay > 0)
             {
-                isWaiting = true;
+                isDelayed = true;
             }
 
-            isRunning = true;
+            isMoving = true;
         }
 
+        public float GetMovementDuration()
+        {
+            return movementDuration;
+        }
+
+        // TODO: Spawner
         /// <summary>
         /// Creates and caches a list of DisplayCases
         /// </summary>
@@ -193,6 +200,11 @@ namespace AdrianMiasik
             }
         }
 
+        public Shader GetShader()
+        {
+            return GetSelectedDisplayModel().GetModelRenderer().sharedMaterial.shader;
+        }
+
         public DisplayCase GetSelectedDisplayModel()
         {
             return displayCaseSelector.GetCurrentItem();
@@ -204,6 +216,7 @@ namespace AdrianMiasik
         /// <param name="_displayCase"></param>
         private void OnDisplayCaseClick(DisplayCase _displayCase)
         {
+            // TODO: Include carousel
             displayCaseSelector.Select(_displayCase);
         }
 
@@ -219,11 +232,6 @@ namespace AdrianMiasik
         public int GetSelectedIndex()
         {
             return displayCaseSelector.GetCurrentIndex();
-        }
-
-        public void Select(int _index)
-        {
-            displayCaseSelector.Select(_index);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
@@ -12,18 +12,17 @@ namespace AdrianMiasik
     {
         [SerializeField] protected Collection<T> items = new Collection<T>();
 
+        /// <summary>
+        /// If set to true and you are selecting the same item multiple times, we will invoke 
+        /// the onSelected on each selection. However, if set to false,
+        /// we will only invoke the onSelected delegate the first time you select the item.
+        /// </summary>
+        [SerializeField] private bool allowSameItemSelection = true;
+        
         private T currentItem;
         private int currentIndex;
         
         private T lastSelectedItem;
-        
-        /// <summary>
-        /// Invoked when the selection changes
-        /// </summary>
-        /// <param name="_previousSelection"></param>
-        /// <param name="_currentSelection"></param>
-        public delegate void OnSelectionChange(T _previousSelection, T _currentSelection);
-        public OnSelectionChange onSelectionChange;
         
         /// <summary>
         /// Invoked when an item gets selected
@@ -119,7 +118,6 @@ namespace AdrianMiasik
             }
 
             ChangeSelection(_itemInList);
-            onSelectionChange?.Invoke(lastSelectedItem, currentItem);
             return true;
         }
 
@@ -150,15 +148,25 @@ namespace AdrianMiasik
             return _index >= 0 && _index < items.Count;
         }
 
-        private void ChangeSelection(T _itemInList)
+        private void ChangeSelection(T _selection)
         {
+            if (!allowSameItemSelection)
+            {
+                if (items.IndexOf(_selection) == currentIndex)
+                {
+                    // Prevent selection changes
+                    return;
+                }
+            }
+            
+            
             // Deselect
             lastSelectedItem = currentItem;
             onDeselected?.Invoke(currentItem);
 
             // Swap
-            currentItem = _itemInList;
-            currentIndex = items.IndexOf(_itemInList);
+            currentItem = _selection;
+            currentIndex = items.IndexOf(_selection);
 
             // Select
             onSelected?.Invoke(currentItem);

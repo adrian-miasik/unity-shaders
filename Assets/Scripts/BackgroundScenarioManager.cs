@@ -2,6 +2,9 @@
 
 namespace AdrianMiasik
 {
+    /// <summary>
+    /// Used to change the camera environment background. Options include skybox / solid color.
+    /// </summary>
     public class BackgroundScenarioManager : MonoBehaviour
     {
         [SerializeField] private Camera currentCamera = null;
