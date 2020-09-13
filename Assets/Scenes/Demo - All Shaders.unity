@@ -4218,7 +4218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carouselSelector: {fileID: 732963890}
   initializationStagger: 0.4
-  animationStaggerDelay: 0.1
+  animationStaggerDelay: 0.35
+  isMovingOnX: 0
 --- !u!114 &732963890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6002,28 +6003,19 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0.12436714
-      outSlope: 0.58055896
+      outSlope: 0.49968046
       tangentMode: 1
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.3893117
-    - serializedVersion: 3
-      time: 0.10025857
-      value: 0.24546635
-      inSlope: 19.396399
-      outSlope: 13.750409
-      tangentMode: 1
-      weightedMode: 3
-      inWeight: 0.11973602
-      outWeight: 0.03155157
+      outWeight: 0.4167312
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.020840058
+      inSlope: 0.0066887974
       outSlope: 0
       tangentMode: 1
       weightedMode: 3
-      inWeight: 0.94169635
+      inWeight: 1
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
