@@ -14,13 +14,13 @@ namespace AdrianMiasik
         {
             shaderProgressID = Shader.PropertyToID(shaderProgressProperty);
             materialBlock = new MaterialPropertyBlock();
-            
+
             return true;
         }
         
-        protected override void OnUpdate(float _progress)
+        protected override void OnUpdate(float _normalizedPercentage)
         {
-            SetRendererProgress(_progress);
+            SetRendererProgress(_normalizedPercentage);
         }
 
         protected override void OnComplete()
