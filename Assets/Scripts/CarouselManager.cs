@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace AdrianMiasik
 {
     public class CarouselManager : MonoBehaviour
     {
-        [SerializeField] private List<DisplayCaseCarousel> carousels = null;
+        [SerializeField] private DisplayCaseCarouselSelector _carouselSelector = null;
         private List<ShaderModel> allShaderModels = new List<ShaderModel>();
 
         [SerializeField] private float initializationStagger = 0.1f;
@@ -13,7 +14,9 @@ namespace AdrianMiasik
 
         [SerializeField] private float animationStaggerDelay = 0.25f;
         private float waitTime;
-
+        
+        // TODO: Unsub properly
+        
         private void Start()
         {
             SetupCarousels();
@@ -21,10 +24,12 @@ namespace AdrianMiasik
 
         private void SetupCarousels()
         {
-            foreach (DisplayCaseCarousel _carousel in carousels)
+            _carouselSelector.Initialize();
+
+            staggerIndex = 0;
+            foreach (DisplayCaseCarousel _carousel in _carouselSelector.GetItems())
             {
-                _carousel.Initialize();
-                _carousel.onSelection += OnCarouselSelection;
+                _carousel.Initialize(this);
 
                 // Query for shader models in the carousel
                 foreach (ShaderModel _shaderModel in FetchShaderModels(_carousel))
@@ -38,30 +43,15 @@ namespace AdrianMiasik
                 }
             }
         }
-
-        private void OnCarouselSelection(DisplayCaseCarousel _selectedCarousel)
+        
+        private int GetIndexDistance(Collection<DisplayCaseCarousel> _collection, DisplayCaseCarousel _itemA, DisplayCaseCarousel _itemB)
         {
-            foreach (DisplayCaseCarousel _carousel in carousels)
+            if (_collection.Contains(_itemA) && _collection.Contains(_itemB))
             {
-                // Move carousels to new index
-                _carousel.MoveTo(new Vector3(
-                        _carousel.staggerDisplayOffset.x * (_selectedCarousel.GetSelectedIndex() * -1),
-                        _carousel.transform.position.y,
-                        _carousel.transform.position.z),
-                    animationStaggerDelay * CompareDistance(_carousel, _selectedCarousel));
-
-                _carousel.Select(_selectedCarousel.GetSelectedIndex());
+                return Mathf.Abs(_collection.IndexOf(_itemA) - _collection.IndexOf(_itemB));
             }
-        }
-
-        private int CompareDistance(DisplayCaseCarousel _carouselA, DisplayCaseCarousel _carouselB)
-        {
-            if (carousels.Contains(_carouselA) && carousels.Contains(_carouselB))
-            {
-                return Mathf.Abs(carousels.IndexOf(_carouselA) - carousels.IndexOf(_carouselB));
-            }
-
-            Debug.LogAssertion("Unable to compare distances - Carousels not found with our list");
+        
+            Debug.LogAssertion("Unable to compare distances - DisplayCaseCarousel not found with our list");
             return 0;
         }
 
@@ -88,7 +78,7 @@ namespace AdrianMiasik
         [ContextMenu("Quit Carousels")]
         private void CleanUpCarousels()
         {
-            foreach (DisplayCaseCarousel _carousel in carousels)
+            foreach (DisplayCaseCarousel _carousel in _carouselSelector.GetItems())
             {
                 _carousel.CleanUp();
             }
@@ -102,6 +92,22 @@ namespace AdrianMiasik
         {
             CleanUpCarousels();
             SetupCarousels();
+        }
+
+        public void OnSelected(DisplayCaseCarousel _selectedCarousel)
+        {
+            _carouselSelector.Select(_selectedCarousel);
+
+            foreach (DisplayCaseCarousel _carousel in _carouselSelector.GetItems())
+            {
+                // X-axis
+                Vector3 desiredPosition = _carousel.transform.position;
+                desiredPosition.x = _carousel.staggerDisplayOffset.x * (_selectedCarousel.GetSelectedIndex() * -1);
+                
+                _carousel.MoveTo(desiredPosition, 
+                    animationStaggerDelay * GetIndexDistance(_carouselSelector.GetItems(),
+                        _carousel, _selectedCarousel));
+            }
         }
     }
 }

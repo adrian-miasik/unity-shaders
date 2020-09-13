@@ -4179,6 +4179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 732963888}
+  - component: {fileID: 732963890}
   - component: {fileID: 732963889}
   m_Layer: 0
   m_Name: Carousel Manager
@@ -4215,11 +4216,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9602e08a821f0784b8a9c83b801d5369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carousels:
+  _carouselSelector: {fileID: 732963890}
+  initializationStagger: 0.4
+  animationStaggerDelay: 0.1
+--- !u!114 &732963890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732963887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32557e9d11094ab29dfc8c1ad9523c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowSameItemSelection: 1
+  startingCarousels:
   - {fileID: 1928552899}
   - {fileID: 1048705940}
-  initializationStagger: 0.4
-  animationStaggerDelay: 0
 --- !u!1 &734387328
 GameObject:
   m_ObjectHideFlags: 0
@@ -5987,19 +6002,28 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0.12436714
-      outSlope: 0.49968046
+      outSlope: 0.58055896
       tangentMode: 1
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.4167312
+      outWeight: 0.3893117
+    - serializedVersion: 3
+      time: 0.10025857
+      value: 0.24546635
+      inSlope: 19.396399
+      outSlope: 13.750409
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.11973602
+      outWeight: 0.03155157
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.0066887974
+      inSlope: 0.020840058
       outSlope: 0
       tangentMode: 1
       weightedMode: 3
-      inWeight: 1
+      inWeight: 0.94169635
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -6016,6 +6040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0752fb6a406c499f9b0bc2108c131847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowSameItemSelection: 1
 --- !u!1 &1065772348
 GameObject:
   m_ObjectHideFlags: 0
@@ -11638,6 +11663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0752fb6a406c499f9b0bc2108c131847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowSameItemSelection: 1
 --- !u!1 &1950370736
 GameObject:
   m_ObjectHideFlags: 0
