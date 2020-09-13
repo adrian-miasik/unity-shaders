@@ -28,10 +28,12 @@ namespace AdrianMiasik
         private void OnSelectionChange(DisplayCase _previousCase, DisplayCase _currentCase)
         {
             currentLabel.Hide();
+            
+            // Create and cache a new label
             currentLabel = SpawnLabel(_currentCase.GetShader().ToString());
         }
 
-        // TODO: Create a spawner for ui elements
+        // TODO: Spawner
         private TitleLabel SpawnLabel(string _message)
         {
             TitleLabel _label = Instantiate(sourceTitleLabelPrefab, transform);
