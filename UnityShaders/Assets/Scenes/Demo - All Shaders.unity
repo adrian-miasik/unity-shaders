@@ -4291,7 +4291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carouselSelector: {fileID: 732963890}
   initializationStagger: 0.4
-  animationStaggerDelay: 0.015
+  animationStaggerDelay: 0.03
   isMovingOnX: 0
 --- !u!114 &732963890
 MonoBehaviour:
@@ -12331,6 +12331,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 2
   m_AntialiasingQuality: 2
