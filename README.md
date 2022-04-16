@@ -6,7 +6,6 @@
   <a href="#media">Screenshots</a> &bull;
   <a href="#author-notes">Author Notes</a> &bull;
   <a href="#donate">Donate</a> &bull;
-  <a href="/CONTRIBUTING.md">Contribute</a> &bull;
   <a href="#contact-us--support-line">Support</a> &bull;
   <a href="#contact-us--support-line">Contact</a>
 </p>
