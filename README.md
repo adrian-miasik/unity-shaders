@@ -62,4 +62,3 @@ This project is not sponsored by, authorized by, or affiliated with Unity Techno
 
 Copyrights and trademarks are the property of their respective owners.
 - Adrian Miasik Logo
-- Github Logo
