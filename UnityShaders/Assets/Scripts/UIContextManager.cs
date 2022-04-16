@@ -12,6 +12,7 @@ namespace AdrianMiasik
         
         // Cache
         private TitleLabel currentLabel = null;
+        private Shader previousShader;
 
         public void Start()
         {
@@ -27,10 +28,19 @@ namespace AdrianMiasik
         
         private void OnSelectionChange(DisplayCase _previousCase, DisplayCase _currentCase)
         {
-            currentLabel.Hide();
+            Shader shader = _currentCase.GetShader();
             
-            // Create and cache a new label
-            currentLabel = SpawnLabel(_currentCase.GetShader().ToString());
+            // If the selected shader is actually a different shader...
+            if (shader != previousShader)
+            {
+                currentLabel.Hide();
+                
+                // Create and cache a new label
+                currentLabel = SpawnLabel(shader.ToString());
+            }
+
+            // Cache shader
+            previousShader = shader;
         }
 
         // TODO: Spawner
