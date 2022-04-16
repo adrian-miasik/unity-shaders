@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="#about">About</a> &bull;
-  <a href="#downloads">Releases</a> &bull;
+  <a href="#releases">Releases</a> &bull;
   <a href="#media">Screenshots</a> &bull;
   <a href="#author-notes">Author Notes</a> &bull;
   <a href="#donate">Donate</a> &bull;
@@ -62,4 +62,3 @@ This project is not sponsored by, authorized by, or affiliated with Unity Techno
 
 Copyrights and trademarks are the property of their respective owners.
 - Adrian Miasik Logo
-- Github Logo
