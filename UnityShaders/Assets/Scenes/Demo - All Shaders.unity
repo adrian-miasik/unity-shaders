@@ -13181,6 +13181,46 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5814564794528620851, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814564794528620851, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814564794528620851, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.26441172
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814564794528620851, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814564794528620851, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814564794528620851, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814564794528620851, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814564794528620851, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6053905955345970996, guid: 32f3b19b3348bd84bb02b92827801616,
         type: 3}
       propertyPath: m_IsActive
@@ -13305,6 +13345,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982169880353186356, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982169880353186356, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982169880353186356, guid: 32f3b19b3348bd84bb02b92827801616,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32f3b19b3348bd84bb02b92827801616, type: 3}
