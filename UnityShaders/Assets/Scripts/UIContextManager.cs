@@ -21,9 +21,13 @@ namespace AdrianMiasik
                 // Subscribe to selection changes
                 _carousel.onDisplayChange += OnSelectionChange;
             }
+
+            Shader shader = selector[selector.Count - 1].GetShader();
             
             // Spawn a label based on the last added carousel
-            currentLabel = SpawnLabel(selector[selector.Count - 1].GetShader().ToString());
+            currentLabel = SpawnLabel(shader.ToString());
+
+            previousShader = shader;
         }
         
         private void OnSelectionChange(DisplayCase _previousCase, DisplayCase _currentCase)
