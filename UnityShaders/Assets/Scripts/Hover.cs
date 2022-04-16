@@ -4,14 +4,14 @@ namespace AdrianMiasik
 {
     public class Hover : MonoBehaviour
     {
-        [SerializeField] private float amplitude = 1;
+        [SerializeField] private float amplitude = 0.075f;
         [SerializeField] private float heightOffset = 0;
         [SerializeField] private float speed = 1f;
 
-        private float accumulatedTime;
-        private Vector3 startingPosition;
-        private Vector3 targetPosition;
-        private float offsetTime;
+        private float accumulatedTime = 0f;
+        private Vector3 startingPosition = Vector3.zero;
+        private Vector3 targetPosition = Vector3.one;
+        private float offsetTime = 0f;
         private bool isInitialized = false;
         
         public void Initialize()
