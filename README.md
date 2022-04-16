@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="#about">About</a> &bull;
-  <a href="#downloads">Releases</a> &bull;
+  <a href="#releases">Releases</a> &bull;
   <a href="#media">Screenshots</a> &bull;
   <a href="#author-notes">Author Notes</a> &bull;
   <a href="#donate">Donate</a> &bull;
