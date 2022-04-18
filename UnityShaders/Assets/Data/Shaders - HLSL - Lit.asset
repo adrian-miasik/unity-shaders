@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Shaders - HLSL - Lit
   m_EditorClassIdentifier: 
   materials:
-  - {fileID: 2100000, guid: c64c0ce1c7250b246ab9433c6e795f60, type: 2}
+  - {fileID: 2100000, guid: 8f3a8a0ced58e414aa2bc824dcf51d07, type: 2}
   - {fileID: 2100000, guid: a30e3d887984f8c45be9f1172dbe0a3e, type: 2}

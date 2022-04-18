@@ -1,4 +1,4 @@
-Shader "AdrianMiasik/Examples/Normals"
+Shader "AdrianMiasik/Examples/Lit/Normals"
 {
     Properties
     {
