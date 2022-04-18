@@ -37,5 +37,7 @@
             }
             ENDCG
         }
+        
+        UsePass "AdrianMiasik/Examples/Normals/Cast Shadows"
     }
 }
