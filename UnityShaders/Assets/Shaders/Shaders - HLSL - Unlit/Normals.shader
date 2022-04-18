@@ -4,6 +4,7 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         _MainColor("Color", Color) = (1,1,1,1)
+        _ResultColor("ResultColor", Color) = (1,1,1,1)
     }
     SubShader
     {
