@@ -1,6 +1,10 @@
 <h1 align="center">Unity Shaders</h1>
 
 <p align="center">
+  <img src="UnityShaders/Assets/Sprites/icon-unity-shaders.png" width="64">
+</p>
+
+<p align="center">
   <a href="#about">About</a> &bull;
   <a href="#releases">Releases</a> &bull;
   <a href="#media">Screenshots</a> &bull;
