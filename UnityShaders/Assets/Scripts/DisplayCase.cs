@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 namespace AdrianMiasik
 {
@@ -19,9 +20,12 @@ namespace AdrianMiasik
 
         public delegate void OnClick(DisplayCase _clickedCase);
         public OnClick onClick;
+
+        private bool disableRendererShadows;
         
-        public void Initialize(GameObject _modelToSpawn, Vector3 _modelLocalPos)
+        public void Initialize(GameObject _modelToSpawn, Vector3 _modelLocalPos, bool disableRendererShadows = false)
         {
+            this.disableRendererShadows = disableRendererShadows;
             SpawnModel(_modelToSpawn, _modelLocalPos);
 
             if (model != null)
@@ -56,6 +60,14 @@ namespace AdrianMiasik
             {
                 // Use desired model
                 model = Instantiate(_modelToSpawn, modelConstraintContainer.transform);
+
+                if (disableRendererShadows)
+                {
+                    if (model.GetComponent<Renderer>())
+                    {
+                        model.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.Off;
+                    }
+                }
             }
 
             model.transform.localPosition = _modelLocalPos;

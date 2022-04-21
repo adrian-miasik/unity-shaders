@@ -12,6 +12,7 @@ namespace AdrianMiasik
         [SerializeField] private DisplayCase displayCasePrefab = null;
         [SerializeField] private GameObject shaderModelPrefab = null;
         [SerializeField] private MaterialList materials = null;
+        [SerializeField] private bool disableRendererShadows = false;
 
         [Tooltip("How much to offset the model inside the display case?")]
         [SerializeField] private Vector3 itemOffset = Vector3.up;
@@ -191,7 +192,7 @@ namespace AdrianMiasik
             {
                 // Create a display
                 DisplayCase _displayCase = Instantiate(_display, transform);
-                _displayCase.Initialize(_modelToSpawnInside, itemOffset);
+                _displayCase.Initialize(_modelToSpawnInside, itemOffset, disableRendererShadows);
                 _displayCase.SetDisplayPosition(_displayCase.GetDisplayWorldPosition() + staggerDisplayOffset * _i + individualDisplayOffset);
                 _displayCase.onClick += OnDisplayCaseClick;
 
