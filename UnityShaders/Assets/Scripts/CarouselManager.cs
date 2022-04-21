@@ -124,7 +124,7 @@ namespace AdrianMiasik
                     // If we are selecting the same index
                     if (previouslySelectedCarousel.GetSelectedIndex() == _selectedCarousel.GetSelectedIndex())
                     {
-                        Debug.Log("same index; skipping x movement");
+//                        Debug.Log("same index; skipping x movement");
                         skipXMovement = true;
                     }
                 }
