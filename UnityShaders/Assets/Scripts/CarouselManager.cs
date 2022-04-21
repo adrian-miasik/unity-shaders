@@ -20,7 +20,7 @@ namespace AdrianMiasik
         private bool isInitialized = false;
         [SerializeField] private bool queryForXMovement = false;
 
-        private DisplayCaseCarousel selectedCarousel;
+        private DisplayCaseCarousel previouslySelectedCarousel;
         private DisplayCase previousDisplayCase;
 
         // TODO: Unsub properly
@@ -52,8 +52,8 @@ namespace AdrianMiasik
                 }
             }
 
-            selectedCarousel = _carouselSelector.GetItems()[0];
-            previousDisplayCase = selectedCarousel.GetSelectedDisplayModel();
+            previouslySelectedCarousel = _carouselSelector.GetItems()[0];
+            previousDisplayCase = previouslySelectedCarousel.GetSelectedDisplayModel();
         }
         
         private int GetIndexDistance(Collection<DisplayCaseCarousel> _collection, DisplayCaseCarousel _itemA, DisplayCaseCarousel _itemB)
@@ -113,25 +113,42 @@ namespace AdrianMiasik
 
             _carouselSelector.Select(_selectedCarousel);
 
+            // If we aren't selecting the same display case...
             if (_selectedItem != previousDisplayCase)
             {
-                // X-axis movement
-                foreach (DisplayCaseCarousel _carousel in _carouselSelector.GetItems())
+                bool skipXMovement = false;
+                
+                // If we aren't selecting the same carousel...
+                if (_selectedCarousel != previouslySelectedCarousel)
                 {
-                    Vector3 desiredPosition = _carousel.transform.position;
-                    desiredPosition.x = _carousel.staggerDisplayOffset.x * (_selectedCarousel.GetSelectedIndex() * -1);
+                    // If we are selecting the same index
+                    if (previouslySelectedCarousel.GetSelectedIndex() == _selectedCarousel.GetSelectedIndex())
+                    {
+                        Debug.Log("same index; skipping x movement");
+                        skipXMovement = true;
+                    }
+                }
+
+                if (!skipXMovement)
+                {
+                    // X-axis movement
+                    foreach (DisplayCaseCarousel _carousel in _carouselSelector.GetItems())
+                    {
+                        Vector3 desiredPosition = _carousel.transform.position;
+                        desiredPosition.x = _carousel.staggerDisplayOffset.x * (_selectedCarousel.GetSelectedIndex() * -1);
                 
-                    float delayTime = animationStaggerDelay * GetIndexDistance(_carouselSelector.GetItems(),
-                        _carousel, _selectedCarousel);
+                        float delayTime = animationStaggerDelay * GetIndexDistance(_carouselSelector.GetItems(),
+                            _carousel, _selectedCarousel);
                 
-                    _carousel.MoveTo(desiredPosition, delayTime);
+                        _carousel.MoveTo(desiredPosition, delayTime);
+                    }
                 }
             }
             
             queryForXMovement = true;
 
             // Cache
-            selectedCarousel = _selectedCarousel;
+            previouslySelectedCarousel = _selectedCarousel;
             previousDisplayCase = _selectedItem;
         }
 
@@ -159,7 +176,7 @@ namespace AdrianMiasik
                     queryForXMovement = false;
                     
                     // Move to correct Z axis distance
-                    Vector3 selectedPosition = selectedCarousel.transform.position;
+                    Vector3 selectedPosition = previouslySelectedCarousel.transform.position;
 
                     foreach (DisplayCaseCarousel carousel in _carouselSelector.GetItems())
                     {
@@ -167,7 +184,7 @@ namespace AdrianMiasik
                             carousel.transform.position.y, carousel.transform.position.z + (selectedPosition.z * -1));
                         
                         carousel.MoveTo(desiredPos, animationStaggerDelay * GetIndexDistance(_carouselSelector.GetItems(),
-                            carousel, selectedCarousel));
+                            carousel, previouslySelectedCarousel));
                     }
                 }
             }                
