@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Lit - Solid Color
-  m_Shader: {fileID: 4800000, guid: e56883e8750248bca508f4183759e819, type: 3}
+  m_Shader: {fileID: 4800000, guid: fbc481484220e9842b213e2cb3feeb5b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
