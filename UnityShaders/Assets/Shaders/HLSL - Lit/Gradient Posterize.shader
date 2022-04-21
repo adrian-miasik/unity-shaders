@@ -1,12 +1,13 @@
-Shader "AdrianMiasik/Examples/Lit/Gradient Custom Blend Points"
+Shader "AdrianMiasik/Examples/Lit/Gradient Posterize"
 {
     Properties
     {
-        // Adrian Miasik - Gradient Custom Blend Points Properties
+        // Adrian Miasik - Gradient Posterize Properties
         _TopColor("Top Color", Color) = (1,1,1,1)
         _BottomColor("Bottom Color", Color) = (0,0,0,1)
         _MaxValue("Max Value", Range(0,1)) = 0.75
         _MinValue("Min Value", Range(0,1)) = 0.25
+        _Bands("Bands", Range(0,100)) = 10
         
         // Specular vs Metallic workflow
         [HideInInspector] _WorkflowMode("WorkflowMode", Float) = 1.0
@@ -144,11 +145,18 @@ Shader "AdrianMiasik/Examples/Lit/Gradient Custom Blend Points"
 
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
 
-            // Adrian Miasik - Gradient Custom Blend Points Properties
+            // Adrian Miasik - Gradient Posterize Properties
             float4 _TopColor;
             float4 _BottomColor;
             float _MaxValue;
             float _MinValue;
+            float _Bands;
+
+            // Adrian Miasik - Gradient Posterize Methods
+            float Posterize(float numberOfBands, float target)
+            {
+                return round(target * numberOfBands) / numberOfBands;
+            }
             
             // Forward pass
             #ifndef UNIVERSAL_FORWARD_LIT_PASS_INCLUDED
@@ -325,13 +333,14 @@ Shader "AdrianMiasik/Examples/Lit/Gradient Custom Blend Points"
 
                 half4 color = UniversalFragmentPBR(inputData, surfaceData);
 
-// Adrian Miasik - Gradient Custom Blend Points Shader - Start
+// Adrian Miasik - Gradient Posterize Shader - Start
 
                 float t = smoothstep(_MinValue, _MaxValue,  input.uv.y);
+                t = Posterize(_Bands + 1, t);
                 float3 blend = lerp(_BottomColor, _TopColor, t);
                 color *= half4(blend, 1);
 
-// Adrian Miasik - Gradient Custom Blend Points Shader - End
+// Adrian Miasik - Gradient Posterize Shader - End
                 
                 color.rgb = MixFog(color.rgb, inputData.fogCoord);
                 color.a = OutputAlpha(color.a, _Surface);
