@@ -233,5 +233,10 @@ namespace AdrianMiasik
         {
             return displayCaseSelector.GetCurrentIndex();
         }
+
+        public bool IsMoving()
+        {
+            return isMoving;
+        }
     }
 }
