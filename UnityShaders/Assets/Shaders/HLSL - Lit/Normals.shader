@@ -326,7 +326,6 @@ Shader "AdrianMiasik/Examples/Lit/Normals"
             }
 
             #endif
-
             
             ENDHLSL
         }
