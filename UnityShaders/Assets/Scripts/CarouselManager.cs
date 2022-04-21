@@ -18,9 +18,10 @@ namespace AdrianMiasik
         private float waitTime;
 
         private bool isInitialized = false;
-        [SerializeField] private bool isMovingOnX = false;
+        [SerializeField] private bool queryForXMovement = false;
 
         private DisplayCaseCarousel selectedCarousel;
+        private DisplayCase previousDisplayCase;
 
         // TODO: Unsub properly
         
@@ -50,6 +51,9 @@ namespace AdrianMiasik
                     staggerIndex++;
                 }
             }
+
+            selectedCarousel = _carouselSelector.GetItems()[0];
+            previousDisplayCase = selectedCarousel.GetSelectedDisplayModel();
         }
         
         private int GetIndexDistance(Collection<DisplayCaseCarousel> _collection, DisplayCaseCarousel _itemA, DisplayCaseCarousel _itemB)
@@ -102,29 +106,33 @@ namespace AdrianMiasik
             SetupCarousels();
         }
 
-        public void OnSelected(DisplayCaseCarousel _selectedCarousel)
+        public void OnSelected(DisplayCaseCarousel _selectedCarousel, DisplayCase _selectedItem)
         {
             // Reset X movement (for interruptions)
-            isMovingOnX = false;
+            queryForXMovement = false;
 
             _carouselSelector.Select(_selectedCarousel);
-            
-            // X-axis movement
-            foreach (DisplayCaseCarousel _carousel in _carouselSelector.GetItems())
+
+            if (_selectedItem != previousDisplayCase)
             {
-                Vector3 desiredPosition = _carousel.transform.position;
-                desiredPosition.x = _carousel.staggerDisplayOffset.x * (_selectedCarousel.GetSelectedIndex() * -1);
-
-                float delayTime = animationStaggerDelay * GetIndexDistance(_carouselSelector.GetItems(),
-                    _carousel, _selectedCarousel);
+                // X-axis movement
+                foreach (DisplayCaseCarousel _carousel in _carouselSelector.GetItems())
+                {
+                    Vector3 desiredPosition = _carousel.transform.position;
+                    desiredPosition.x = _carousel.staggerDisplayOffset.x * (_selectedCarousel.GetSelectedIndex() * -1);
                 
-                _carousel.MoveTo(desiredPosition, delayTime);
+                    float delayTime = animationStaggerDelay * GetIndexDistance(_carouselSelector.GetItems(),
+                        _carousel, _selectedCarousel);
+                
+                    _carousel.MoveTo(desiredPosition, delayTime);
+                }
             }
-
-            isMovingOnX = true;
             
+            queryForXMovement = true;
+
             // Cache
             selectedCarousel = _selectedCarousel;
+            previousDisplayCase = _selectedItem;
         }
 
         private void Update()
@@ -134,7 +142,7 @@ namespace AdrianMiasik
                 return;
             }
 
-            if (isMovingOnX)
+            if (queryForXMovement)
             {
                 // Query for when the carousels stop moving
                 int numberOfCarouselsMoving = _carouselSelector.GetCount();
@@ -148,7 +156,7 @@ namespace AdrianMiasik
                 
                 if (numberOfCarouselsMoving == 0)
                 {
-                    isMovingOnX = false;
+                    queryForXMovement = false;
                     
                     // Move to correct Z axis distance
                     Vector3 selectedPosition = selectedCarousel.transform.position;

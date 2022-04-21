@@ -76,7 +76,7 @@ namespace AdrianMiasik
         {
             if (carouselManager != null)
             {
-                carouselManager.OnSelected(this);
+                carouselManager.OnSelected(this, _selectedItem);
             }
             
             onDisplayChange?.Invoke(displayCaseSelector.GetLastSelectedItem(), _selectedItem);
