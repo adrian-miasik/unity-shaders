@@ -5,6 +5,9 @@ Shader "AdrianMiasik/Examples/Lit/Lambert"
         // Adrian Miasik - Lambert Properties
         _MainColor("Color", Color) = (1,1,1,1)
         _AmbientLight("Ambient Light", Color) = (0.0,0.075,0.15, 1)
+        // Provided via Scripting since built-in shader variable isn't easily accessible in SRP
+        _WorldSpaceLightPosition("World Space Light Position", Vector) = (0,0,0) // (See HLSLLitLambert.cs)
+        _WorldSpaceLightColor("World Space Light Color", color) = (1,1,1,1)
         
         // Specular vs Metallic workflow
         [HideInInspector] _WorkflowMode("WorkflowMode", Float) = 1.0
@@ -145,6 +148,8 @@ Shader "AdrianMiasik/Examples/Lit/Lambert"
             // Adrian Miasik - Lambert Properties
             float4 _MainColor;
             float4 _AmbientLight;
+            float4 _WorldSpaceLightPosition;
+            float4 _WorldSpaceLightColor;
 
             // Adrian Miasik - Lambert CG Includes
             // #include "UnityShaderVariables.cginc"
@@ -328,14 +333,14 @@ Shader "AdrianMiasik/Examples/Lit/Lambert"
 // Adrian Miasik - Lambert Shader - Start
                 
                 // Direct light
-                float3 lightSource = _WorldSpaceLightPos0.xyz;
+                float3 lightSource = _WorldSpaceLightPosition.xyz;
                 float lightFalloff = max(0, dot(lightSource, input.normalWS)); // 0f to 1f     
-                float3 directDiffuseLight = _LightColor0 * lightFalloff;
+                float3 directDiffuseLight = _WorldSpaceLightColor * lightFalloff;
                 
                 // Composite
                 float3 diffuseLight = directDiffuseLight + _AmbientLight;
                 float3 result = diffuseLight * _MainColor;
-                color *= result;
+                color *= float4(result, 1);
 
 // Adrian Miasik - Lambert Shader - End
                 
