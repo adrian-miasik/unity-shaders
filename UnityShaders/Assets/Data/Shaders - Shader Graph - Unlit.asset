@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5e0e11e00514afe89019ddac0d6ebb0, type: 3}
-  m_Name: Shaders - Shader Graph
+  m_Name: Shaders - Shader Graph - Unlit
   m_EditorClassIdentifier: 
   materials:
-  - {fileID: 2100000, guid: c64c0ce1c7250b246ab9433c6e795f60, type: 2}
+  - {fileID: 2100000, guid: a391f3211b642134da8e5f83989b6d1d, type: 2}
   - {fileID: 2100000, guid: 5591f47a33907564c9af0d7072ce58ff, type: 2}
   - {fileID: 2100000, guid: 531c73fe6a7a8554d8397facc6f8c420, type: 2}
   - {fileID: 2100000, guid: 6f1599cd364c11e448ab4b07bd469fa3, type: 2}
