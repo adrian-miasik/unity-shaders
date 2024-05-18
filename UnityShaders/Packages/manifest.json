@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.cyanilux.shadergraph-to-png": "https://github.com/Cyanilux/ShaderGraphToPNG.git",
     "com.unity.ide.rider": "3.0.28",
     "com.unity.render-pipelines.universal": "16.0.5",
     "com.unity.ugui": "2.0.0",

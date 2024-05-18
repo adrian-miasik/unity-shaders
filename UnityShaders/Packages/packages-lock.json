@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.cyanilux.shadergraph-to-png": {
+      "version": "https://github.com/Cyanilux/ShaderGraphToPNG.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "2ec7eafd6650660b0201c862aa90e4295f3b47c6"
+    },
     "com.unity.burst": {
       "version": "1.8.13",
       "depth": 1,
