@@ -34,7 +34,7 @@ Want to help? Send me an email with a proposal and poke me to create a contribut
 &nbsp;
 # Releases
 ## Latest
-- [v1.1.1 - Unity 2023.2 + Improved UI + Z-Axis Movement](https://github.com/adrian-miasik/unity-shaders/releases/tag/v1.1.0)
+- [v1.1.1 - Unity 2023.2 + Improved UI + Z-Axis Movement](https://github.com/adrian-miasik/unity-shaders/releases/tag/v1.1.1)
 
 ### Previous
 - [v1.1.0 - Universal Render Pipeline](https://github.com/adrian-miasik/unity-shaders/releases/tag/v1.1.0)
