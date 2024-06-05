@@ -33,9 +33,11 @@ Want to help? Send me an email with a proposal and poke me to create a contribut
 
 &nbsp;
 # Releases
-- [v1.1.0 - Universal Render Pipeline](https://github.com/adrian-miasik/unity-shaders/releases/tag/v1.1.0)
+## Latest
+- [v1.1.1 - Improved UI + Z-Axis Movement + Updated to Unity 2023.2](https://github.com/adrian-miasik/unity-shaders/releases/tag/v1.1.0)
 
-### Previous Releases
+### Previous
+- [v1.1.0 - Universal Render Pipeline](https://github.com/adrian-miasik/unity-shaders/releases/tag/v1.1.0)
 - [v1.0.0 - Initial Launch](https://github.com/adrian-miasik/unity-shaders/releases/tag/v1.0.0)
 
 
