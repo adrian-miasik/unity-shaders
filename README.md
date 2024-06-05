@@ -22,7 +22,7 @@ Unity Shaders is an open source project containing a bunch of shader examples cr
 Featuring a fully interactive shader gallery containing over 30+ shaders! (HLSL & ShaderGraph variations included). 
 Quickly swap backgrounds between skybox / solid colors to see your shader in a different environment.
 
-**Version**:  1.1.0
+**Version**:  1.1.1
 
 **Author**:  **[`Adrian Miasik`](https://adrian-miasik.com)**
 
