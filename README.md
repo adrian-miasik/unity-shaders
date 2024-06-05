@@ -40,6 +40,8 @@ Want to help? Send me an email with a proposal and poke me to create a contribut
 - [v1.1.0 - Universal Render Pipeline](https://github.com/adrian-miasik/unity-shaders/releases/tag/v1.1.0)
 - [v1.0.0 - Initial Launch](https://github.com/adrian-miasik/unity-shaders/releases/tag/v1.0.0)
 
+## Donate
+If you'd like to support my work, you can donate to help support this project via [GitHub Sponsors](https://github.com/sponsors/adrian-miasik) ❤️
 
 &nbsp;
 ## Media
@@ -49,9 +51,6 @@ Want to help? Send me an email with a proposal and poke me to create a contribut
 - Unity Shaders is a project I created to learn more about shaders. Hopefully others can learn a thing or two as well :)
 - See [my GitHub profile](https://github.com/adrian-miasik) for more open source work
 - I'm also currently open for work, if you're hiring send me an email at: `recruit.11946@adrian-miasik.com`
-
-## Donate
-If you'd like to support my work, you can donate to help support this project via [GitHub Sponsors](https://github.com/sponsors/adrian-miasik) ❤️
 
 ## Contact Us / Support Line
 Need help?  Found a bug?  
