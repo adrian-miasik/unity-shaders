@@ -22,7 +22,7 @@ Unity Shaders is an open source project containing a bunch of shader examples cr
 Featuring a fully interactive shader gallery containing over 30+ shaders! (HLSL & ShaderGraph variations included). 
 Quickly swap backgrounds between skybox / solid colors to see your shader in a different environment.
 
-**Version**:  1.1.0
+**Version**:  1.1.1
 
 **Author**:  **[`Adrian Miasik`](https://adrian-miasik.com)**
 
@@ -45,7 +45,56 @@ If you'd like to support my work, you can donate to help support this project vi
 
 &nbsp;
 ## Media
+### Overview
 <img src="/readme-preview.png">
+
+#### Normals
+<img src="/screenshots/Normals.png">
+
+#### World Space
+<img src="/screenshots/World Space.png">
+
+#### UV
+<img src="/screenshots/UV.png">
+
+#### Gradient
+<img src="/screenshots/Gradient.png">
+
+#### Gradient Custom Blend Points
+<img src="/screenshots/Gradient Custom Blend Points.png">
+
+#### Gradient Posterize
+<img src="/screenshots/Gradient Posterize.png">
+
+#### Lambert
+<img src="/screenshots/Lambert.png">
+
+#### Specular
+<img src="/screenshots/Specular.png">
+
+#### Specular Cell Shade
+<img src="/screenshots/Specular Cell Shade.png">
+
+#### Depth
+<img src="/screenshots/Depth.png">
+
+#### Transparency
+<img src="/screenshots/Transparency.png">
+
+#### Scrolling Texture
+<img src="/screenshots/Scrolling Texture.png">
+
+#### Scrolling Texture Cutout
+<img src="/screenshots/Scrolling Texture Cutout.png">
+
+#### Disappearing Cow
+<img src="/screenshots/Disappearing Cow.png">
+
+#### 2 Tone Dissolve
+<img src="/screenshots/2 Tone Dissolve.png">
+
+#### Sine Vertex Displacement
+<img src="/screenshots/Sine Vertex Displacement.png">
 
 ## Author Notes
 - Unity Shaders is a project I created to learn more about shaders. Hopefully others can learn a thing or two as well :)
@@ -60,6 +109,9 @@ Alternatively, you can also report bugs directly to our [issues page](https://gi
 
 For personal business related inquires / proposals:  
 `recruit.11946@adrian-miasik.com`
+
+## Third Party
+- ShaderGraph screenshots generated with Cyanilux's [ShaderGraphToPNG](https://github.com/Cyanilux/ShaderGraphToPNG) package 👍
 
 ## Legal
 This project is not sponsored by, authorized by, or affiliated with Unity Technologies or its affiliates.
